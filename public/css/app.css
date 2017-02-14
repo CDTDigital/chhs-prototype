@@ -1,0 +1,242 @@
+﻿* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+.site {
+    height: 100%;
+    margin: 0px;
+}
+
+/*main menu styles*/
+.main_menu {
+    background: #003466;
+    height: 100%;
+    z-index: 8;
+    position: fixed;
+    max-width: 50px;
+    box-shadow: inset -1px 0px 1px #003466;
+    border-right: 1px solid #003466;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+    .main_menu ul {
+        padding: 0px;
+    }
+
+        .main_menu ul li {
+        }
+
+            .main_menu ul li a {
+                font-weight: normal;
+                font-size: 22px;
+                padding: 15px 13px;
+                border-top: 1px solid #fff;
+                border-bottom: 1px solid #fff;
+                display: block;
+                margin-bottom: -1px;
+                color: #ffffff;
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+            }
+
+                .main_menu ul li a:hover {
+                    font-weight: normal;
+                    background: #005e90;
+                    font-size: 22px;
+                    padding: 15px 13px;
+                    border-top: 1px solid #030405;
+                    border-bottom: 1px solid #030405;
+                    display: block;
+                    margin-bottom: -1px;
+                    color: #BD9408;
+                    text-decoration: none;
+                }
+
+.inner ul {
+    margin-top: 0px;
+}
+
+.inner .active, .inner .active:hover {
+    background: #ffffff;
+    margin-left: 4px;
+    margin-right: -1px;
+}
+
+    .inner .active i {
+        color: #003466;
+    }
+
+/*sidebar*/
+.side-bar {
+    background: #ffffff;
+    margin-left: 50px;
+    max-width: 240px;
+    min-height: 100%;
+    box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.22);
+    margin-bottom: 0px;
+}
+
+    .side-bar .logo {
+        margin-left: 50px;
+    }
+
+/*header*/
+.header {
+    height: 75px;
+    padding-top: 15px;
+}
+
+.logo {
+    float: left;
+}
+
+/*Catalog menu*/
+#tabs div {
+    display: none;
+}
+
+    #tabs div p {
+        font-size: 14px;
+    }
+
+#tabs .active {
+    display: block !important;
+}
+
+.catalog {
+    padding: 0px;
+    margin: 0px -15px;
+}
+
+
+    .catalog li {
+        list-style: none;
+    }
+
+        .catalog li a {
+            color: #5d8eae;
+            padding: 8px 10px;
+            border-bottom: 1px solid #e7e7e7;
+            font-weight: normal;
+            font-size: 12px;
+            display: block;
+            float: left;
+            width: 100%;
+        }
+
+            .catalog li a:hover {
+                color: #5d8eae;
+                padding: 8px 10px;
+                border-bottom: 1px solid #e7e7e7;
+                font-weight: normal;
+                background: #eef8ff;
+                display: block;
+                float: left;
+                width: 100%;
+            }
+
+        .catalog li span {
+            float: right;
+            color: #c8c8c8;
+            font-size: 9px;
+            padding: 3px;
+        }
+
+    .catalog .activepoint, .catalog .activepoint:hover {
+        background: #005e90; /* Old browsers */
+        color: #ffffff;
+        font-weight: 300;
+        margin-top: -1px;
+        margin-bottom: -1px;
+        z-index: 1;
+    }
+
+        .catalog .activepoint span {
+            background: #F3CF5D;
+            padding: 3px;
+            font-size: 9px;
+            border-radius: 3px;
+            box-shadow: inset 0px 1px 0px #FBAD23, 0px 1px 0px #FBAD23;
+            color: #003466;
+        }
+
+.activepoint .arrow {
+    background: url(../img/arrow.png);
+    width: 14px;
+    position: absolute;
+    height: 34px;
+    float: right;
+    margin-top: -25px;
+    margin-left: 229px;
+}
+
+h5.cat {
+    color: #BD9408;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 0px;
+}
+
+
+/*map*/
+.map {
+    min-width: 100%;
+    min-height: 100%;
+    background: #ebe6dc;
+    position: fixed !important;
+}
+
+.btm-zindex {
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 100px;
+}
+
+#cont {
+    z-index: 2;
+}
+
+.none {
+    display: none !important;
+}
+
+@media (min-width: 480px) {
+    .map_open {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .map_open{
+
+        padding-bottom:10px
+    }
+
+    .map_open a {
+        display: block;
+        text-align: center;
+        padding: 15px;
+        background: #003466;
+        margin: 0px;
+        border-radius: 4px;
+        color: #ffffff;
+    }
+
+    .side-bar {
+
+        max-width:100%;
+    }
+}

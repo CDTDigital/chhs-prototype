@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.3.6/alasql.min.js"></script>
+<script src="js/arcgis.js"></script>
+<script>
+
+        $(function () {
+
+                //var arcgisActiveFire = new ArcgisActiveFire();
+                //console.log('currentfirecount: ' + arcgisActiveFire.currentFireCount());
+
+
+                $.when(arcgisActiveFire.getCurrentFireCount(), arcgisActiveFire.getLastYearFireCount()).done(function(current, lastyear) {
+                        
+                        arcgisActiveFire.currentfirecount = current;
+                        arcgisActiveFire.lastyearfirecount = lastyear;
+                        
+                        console.log('currentfirecount: ' + arcgisActiveFire.currentfirecount);
+                        console.log('lastyearfirecount: ' + arcgisActiveFire.lastyearfirecount);
+                        
+                 });
+
+                //arcgisActiveFire.currentfirecount().done(function(data) {
+                        //console.log('currentfirecount: ' + data);
+                //});
+
+        });
+
+</script>
+</head>
+<body>
+</body>
+</html>

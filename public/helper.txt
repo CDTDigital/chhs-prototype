@@ -1,0 +1,85 @@
+var ArcgisActiveFire = function() {
+
+    // private variables
+    var today = new Date();
+    var curyear = today.getFullYear();
+    var lastYear = curyear - 1;
+
+    var dynamicApi = 'https://wildfire.cr.usgs.gov/arcgis/rest/services/geomac_dyn/MapServer';
+    var definitionUrl = dynamicApi + "?f=pjson";
+    var whereClause = 'query?where=state%3D%27ca%27';
+    var countOnly = '&returnCountOnly=true&f=pjson';
+    var currentFireLayerId = 0;
+    var lastYearFireLayerId;
+
+    // private functions
+    function lastYearFireCount(){
+
+        $.getJSON( definitionUrl)
+        .done(function( data ) {
+
+            //console.log(JSON.stringify(data))
+            var tsql = 'SELECT id FROM ? WHERE name ="' + lastYear + ' Fires"'
+            var retval = alasql(tsql,[data.layers]); 
+            lastYearFireLayerId = retval[0].id;
+            //console.log(retval[0].id);
+
+        }).fail(function( jqxhr, textStatus, error ) {
+            var err = textStatus + ", " + error;
+            console.log( "Request Failed: " + err );
+            lastYearFireLayerId = -1;
+        });
+
+    }
+
+    function currentFireCount()
+    {
+        var retval = -1;
+        var api = dynamicApi + '/' + currentFireLayerId + '/' + whereClause + countOnly;
+
+        $.ajax({
+                url: api,
+                dataType: 'json',
+                async: false,
+                success: function(data) {
+                    retval = data.count;
+                },
+                error:function( jqxhr, textStatus, error ) {
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                }
+        });
+
+        return retval;
+        
+    }
+
+
+    // return public members
+    return {
+        currentFireCount: currentFireCount
+    }
+
+   
+        
+
+};
+
+$ git init
+$ git remote add https://github.com/theifishgroup/chhs-prototype.git
+$ echo "node_modules/" > .gitignore
+$ git add .
+$ git commit -m "initial commit"
+$ git push origin master
+
+function initialize() {
+    var map;
+
+    require(["esri/map"], function (Map) {
+        map = new Map("map_canvas", {
+            basemap: "streets",
+            center: [-119.417931, 36.778259],
+            zoom: 6
+        });
+    });
+};
