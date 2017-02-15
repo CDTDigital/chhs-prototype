@@ -65,8 +65,30 @@ var ArcgisActiveFire = function() {
 
 };
 
+{
+    return $.getJSON('https://wildfire.cr.usgs.gov/arcgis/rest/services/geomac_dyn/MapServer?f=pjson')
+    .then(function(data) {
+
+            var today = new Date();
+            var curyear = today.getFullYear();
+            var lastYear = curyear - 1;
+
+            var tsql = 'SELECT id FROM ? WHERE name ="' + lastYear + ' Fires"'
+            var retval = alasql(tsql,[data.layers]); 
+            return retval[0].id;
+
+    }).then(function(id){
+        return $.getJSON('https://wildfire.cr.usgs.gov/arcgis/rest/services/geomac_dyn/MapServer/' + id + '/query?where=state%3D%27CA%27&returnCountOnly=true&f=pjson')
+            .then(function(data) {
+                return data.count;
+        });
+    }).fail( function(d) {
+        console.error("getLastYearFireCount failed, stack: " + d.stack + ", error: "+ d.message)
+    });
+  }
+  
 $ git init
-$ git remote add https://github.com/theifishgroup/chhs-prototype.git
+$ git remote add git rm -r --cached node_modules/chhs-prototype.git
 $ echo "node_modules/" > .gitignore
 $ git add .
 $ git commit -m "initial commit"
@@ -83,3 +105,7 @@ function initialize() {
         });
     });
 };
+
+git rm -r one-of-the-directories
+git commit -m "Remove duplicated directory"
+git push origin <your-git-branch> (typically 'master', but not always)

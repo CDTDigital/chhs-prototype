@@ -1,3 +1,4 @@
+
 var app = {
 
     bindMenu: function () {
@@ -20,13 +21,13 @@ var app = {
 
     bindCatalog: function () {
 
-        $("ul.catalog li a").each(function (i) {
-            $("ul.catalog li a").click(function () {
-                $("ul.catalog li a").removeClass("activepoint");
-                $(this).addClass("activepoint");
-                return false;
-            })
+        $('body').on('click', 'ul.catalog li a', function (e) {
+            e.preventDefault();
+            $("ul.catalog li a").removeClass("activepoint");
+            $(this).addClass("activepoint");
+            arcgis.addLayer($(this)[0]);
         });
+
     },
 
     bindButtons: function () {
@@ -50,28 +51,31 @@ var app = {
 var helper = {
 
     showCatalog: function (catalog) {
-        buildCatalog(catalog);
+
+        switch (catalog) {
+            case "#tabActiveFire":
+                if (!arcgisActiveFire.isloaded) {
+                    $.when(arcgisActiveFire.getCurrentFireCount(), arcgisActiveFire.getLastYearFireCount()).done(function (current, lastyear) {
+
+                        addCatalogLink(catalog, arcgisActiveFire.api, arcgisActiveFire.currentfirelayerid, arcgisActiveFire.whereclause, 'Current Fires', current);
+                        addCatalogLink(catalog, arcgisActiveFire.api, arcgisActiveFire.lastyearfirelayerid, arcgisActiveFire.whereclause, 'Last Year Fires', lastyear);
+
+                    });
+
+                    arcgisActiveFire.isloaded = true;
+                }
+                break;
+        }
     }
 
 };
 
-function buildCatalog(catalog) {
-    switch (catalog) {
-        case "#tabActiveFire":
-            if (!arcgisActiveFire.isloaded) {
+function addCatalogLink(catalog, href, layerid, where, title, count) {
 
-                $.when(arcgisActiveFire.getCurrentFireCount(), arcgisActiveFire.getLastYearFireCount()).done(function (current, lastyear) {
+    var dom = catalog + ' ul.catalog';
+    var html = '<li><a href="{0}" id="{1}" rel="{2}">{3}<span>{4}</span></a></li>'.format(href, layerid, where, title, count);
 
-                    arcgisActiveFire.currentfirecount = current;
-                    arcgisActiveFire.lastyearfirecount = lastyear;
-
-                    console.log('currentfirecount: ' + arcgisActiveFire.currentfirecount);
-                    console.log('lastyearfirecount: ' + arcgisActiveFire.lastyearfirecount);
-
-                });
-
-                arcgisActiveFire.isloaded = true;
-            }
-            break;
-    }
+    $(dom).append(html);
 }
+
+
