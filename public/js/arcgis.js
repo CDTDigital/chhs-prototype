@@ -79,7 +79,7 @@ var arcgis = {
 
     var map = arcgis.webmap;
 
-    if(map.layerIds.length <= 1) return;
+    if (map.layerIds.length <= 1) return;
 
     var ids = map.layerIds;
     var layer = map.getLayer(ids[1]);
