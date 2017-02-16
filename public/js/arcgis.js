@@ -9,16 +9,26 @@ AMD specification not valid for old browsers (i.e. IE)
 var arcgis = {
 
   webmap: null,
+  featureLayerid : 'arcgis-layer',
 
   initializeMap: function () {
 
     var map;
+    
+    require(["esri/map", "esri/geometry/webMercatorUtils", "esri/dijit/Popup", "esri/dijit/PopupTemplate", "dojo/dom-construct", "dojo/dom", "dojo/domReady!"], function (Map, webMercatorUtils, Popup, PopupTemplate, domConstruct, dom) {
 
-    require(["esri/map", "esri/geometry/webMercatorUtils", "dojo/dom", "dojo/domReady!"], function (Map,webMercatorUtils, dom) {
+      var popupOptions = {
+        marginLeft: "20",
+        marginTop: "20"
+      };
+      //create a popup to replace the map's info window
+      var popup = new Popup(popupOptions, domConstruct.create("div"));
+
       map = new Map("map_canvas", {
         basemap: "streets",
         center: [-119.417931, 36.778259],
-        zoom: 6
+        zoom: 6,
+        infoWindow: popup
       });
 
       map.on("load", function () {
@@ -26,6 +36,8 @@ var arcgis = {
         map.on("mouse-move", showCoordinates);
         map.on("mouse-drag", showCoordinates);
       });
+
+
 
       function showCoordinates(evt) {
         //the map is in web mercator but display coordinates in geographic (lat, long)
@@ -38,6 +50,60 @@ var arcgis = {
     });
 
 
+  },
+
+  addFeatureLayer: function (obj) {
+
+    arcgis.removeFeatureLayer();
+
+    var map = arcgis.webmap;
+    var api = obj.href;
+    var layerid = obj.id;
+    var where = obj.rel;
+
+    require([
+      "esri/map",
+      "esri/dijit/Popup", "esri/dijit/PopupTemplate",
+      "esri/layers/FeatureLayer",
+      "esri/symbols/SimpleFillSymbol", "esri/Color",
+      "dojo/dom-class", "dojo/dom-construct", "dojo/on",
+      "dojox/charting/Chart", "dojox/charting/themes/Dollar",
+      "dojo/domReady!"
+    ], function (
+      Map,
+      Popup, PopupTemplate,
+      FeatureLayer,
+      SimpleFillSymbol, Color,
+      domClass, domConstruct, on,
+      Chart, theme
+    ) {
+
+        var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
+        var popup = new Popup({
+          fillSymbol: fill,
+          titleInBody: false
+        }, domConstruct.create("div"));
+
+        map.setInfoWindow(popup);
+
+        var template = new PopupTemplate({
+          title: "Title Goes Here",
+          description: "Ernie Lopez"
+        });
+
+        var featureLayer = new FeatureLayer("{0}/{1}".format(api, layerid), {
+          mode: FeatureLayer.MODE_ONDEMAND,
+          outFields: ["*"],
+          infoTemplate: template
+        });
+
+        featureLayer.setDefinitionExpression(where);
+
+        featureLayer.id = arcgis.featureLayerid;
+        map.addLayer(featureLayer);
+
+
+      });
   },
 
   addLayer: function (obj) {
@@ -54,15 +120,12 @@ var arcgis = {
       "esri/map",
       "esri/layers/ArcGISDynamicMapServiceLayer",
       "esri/layers/ImageParameters",
-      "esri/dijit/PopupMobile",
-      "dojo/dom-construct",
       "dojo/domReady!"
     ],
-      function (esriConfig, Map, ArcGISDynamicMapServiceLayer, ImageParameters, PopupMobile, domConstruct) {
+      function (esriConfig, Map, ArcGISDynamicMapServiceLayer, ImageParameters) {
 
         //TODO: Look into CORS
         esriConfig.defaults.io.corsDetection = false;
-        var popup = new PopupMobile(null, domConstruct.create("div"));
 
         var imageParameters = new ImageParameters();
 
@@ -74,7 +137,8 @@ var arcgis = {
         imageParameters.layerOption = ImageParameters.LAYER_OPTION_SHOW;
         imageParameters.transparent = true;
 
-        var dynamicMapServiceLayer = new ArcGISDynamicMapServiceLayer(api, { "imageParameters": imageParameters });
+        var dynamicMapServiceLayer = new ArcGISDynamicMapServiceLayer(api,
+          { "imageParameters": imageParameters });
 
         map.addLayer(dynamicMapServiceLayer);
 
@@ -92,7 +156,20 @@ var arcgis = {
     var layer = map.getLayer(ids[1]);
     map.removeLayer(layer);
 
+  },
+
+  removeFeatureLayer: function () {
+
+    var map = arcgis.webmap;
+
+    var layer = map.getLayer(arcgis.featureLayerid);
+
+    if(layer == undefined) return;
+
+    map.removeLayer(layer);
+
   }
+
 };
 
 var arcgisActiveFire = {

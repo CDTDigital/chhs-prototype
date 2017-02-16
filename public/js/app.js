@@ -25,7 +25,7 @@ var app = {
             e.preventDefault();
             $("ul.catalog li a").removeClass("activepoint");
             $(this).addClass("activepoint");
-            arcgis.addLayer($(this)[0]);
+            arcgis.addFeatureLayer($(this)[0]);
         });
 
     },
@@ -103,7 +103,7 @@ var helper = {
 
                 }
                 break;
-
+            //TODO: Look into why Earthquakes Last 24 Hours is failing
             case "#tabGEMS":
                 if (!arcgisGEMS.isloaded) {
                     $.when(arcgisGEMS.getEarthquakeCount(),arcgisGEMS.getWildfireCount()).done(function (earthquake,wildfire) {
