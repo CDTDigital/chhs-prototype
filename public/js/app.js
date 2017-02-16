@@ -60,15 +60,106 @@ var helper = {
                         addCatalogLink(catalog, arcgisActiveFire.api, arcgisActiveFire.currentfirelayerid, arcgisActiveFire.whereclause, 'Current Fires', current);
                         addCatalogLink(catalog, arcgisActiveFire.api, arcgisActiveFire.lastyearfirelayerid, arcgisActiveFire.whereclause, 'Last Year Fires', lastyear);
 
+                        arcgisActiveFire.isloaded = true;
+
+                    }).fail(function (jsxhr, tetxstatus) {
+
                     });
 
-                    arcgisActiveFire.isloaded = true;
+
                 }
                 break;
+
+            case "#tabRiverGauge":
+                if (!arcgisRiverGauge.isloaded) {
+                    $.when(arcgisRiverGauge.getRiverStagesCount(), arcgisRiverGauge.getFullForecastCount()).done(function (riverstage, fullforecast) {
+
+                        addCatalogLink(catalog, arcgisRiverGauge.api, arcgisRiverGauge.riverstageslayerid, arcgisRiverGauge.whereclause, 'Observed River Stages', riverstage);
+                        addCatalogLink(catalog, arcgisRiverGauge.api, arcgisRiverGauge.fullforecastlayerid, arcgisRiverGauge.whereclause, 'Full Forecast Period Stages', fullforecast);
+
+                        arcgisRiverGauge.isloaded = true;
+
+                    }).fail(function (jsxhr, tetxstatus) {
+
+                    });
+
+
+                }
+                break;
+
+            case "#tabWeather":
+                if (!arcgisWeatherHazard.isloaded) {
+                    $.when(arcgisWeatherHazard.getTemperatureCount(), arcgisWeatherHazard.getPrecipitationCount()).done(function (temp, precip) {
+
+                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.temperaturelayerid, arcgisWeatherHazard.whereclause, '3-7 Day Temperature Outlook', temp);
+                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.precipitationlayerid, arcgisWeatherHazard.whereclause, '3-7 Day Precipitation Outlook', precip);
+
+                        arcgisWeatherHazard.isloaded = true;
+
+                    }).fail(function (jsxhr, tetxstatus) {
+
+                    });
+
+
+                }
+                break;
+
+            case "#tabGEMS":
+                if (!arcgisGEMS.isloaded) {
+                    $.when(arcgisGEMS.getEarthquakeCount(),arcgisGEMS.getWildfireCount()).done(function (earthquake,wildfire) {
+
+                        addCatalogLink(catalog, arcgisGEMS.api, arcgisGEMS.earthquakelayerid, arcgisGEMS.whereclause, 'Earthquakes Last 24 Hours', earthquake);
+                        addCatalogLink(catalog, arcgisGEMS.api, arcgisGEMS.wildfirelayerid, arcgisGEMS.whereclause2, 'Active Wildfires', wildfire);
+
+                        arcgisGEMS.isloaded = true;
+
+                    }).fail(function (jsxhr, tetxstatus) {
+
+                    });
+
+                }
+                break;
+
+
+
         }
+
+    },
+
+    threeDaysOut: function () {
+
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+
+        var todayDate = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+        var month = pad(todayDate.getMonth() + 1);
+        var day = pad(todayDate.getDate());
+        var year = pad(todayDate.getFullYear());
+        return "{0}/{1}/{2}".format(month, day, year);
+    },
+
+    sevenDaysOut: function () {
+
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+
+        var todayDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+        var month = pad(todayDate.getMonth() + 1);
+        var day = pad(todayDate.getDate());
+        var year = pad(todayDate.getFullYear());
+        return "{0}/{1}/{2}".format(month, day, year);
     }
 
 };
+
+//---------Helper Functions------------------------------------
+String.prototype.format = function () {
+    var formatted = this;
+    for (var i = 0; i < arguments.length; i++) {
+        var regexp = new RegExp('\\{' + i + '\\}', 'gi');
+        formatted = formatted.replace(regexp, arguments[i]);
+    }
+    return formatted;
+};
+
 
 function addCatalogLink(catalog, href, layerid, where, title, count) {
 

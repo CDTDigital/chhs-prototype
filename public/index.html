@@ -12,7 +12,9 @@
 <body>
 
     <a href="#" class="btn btn-danger btn-sm btm-zindex none" id="show_cont">Show content</a>
-    <div id="map_canvas" class="map"></div>
+    <div id="map_canvas" class="map">
+        <span id="coordinates"></span>
+    </div>
     <div class="row site">
         <div class="col-md-1 main_menu inner">
 
@@ -28,12 +30,6 @@
                 </li>
                 <li>
                     <a href="tabWeather"><i class="icon-rain"></i></a>
-                </li>
-                <li>
-                    <a href="tabEarthquakes"><i class="icon-wavealt-seaalt"></i></a>
-                </li>
-                <li>
-                    <a href="tabTsunami"><i class="icon-tornado"></i></a>
                 </li>
                 <li>
                     <a href="tabGEMS"><i class="icon-world"></i></a>
@@ -83,41 +79,20 @@
                         <div id="tabRiverGauge" class="tab">
                             <h5 class="cat">River Gauge - Current and Forecast (NOAA)</h5>
                             <ul class="catalog">
-                                <li><a href="#">Full Forecast Period Stages<span>1</span></a></li>
-                                <li><a href="#">Flood Outlook<span>4</span></a></li>
-
-                                <li>
-                                    <a href="#">
-                                        QPF 24 Hour Day 1<span>1</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">QPF 48 Hour Day 1-2<span>2</span></a></li>
+                                
                             </ul>
                         </div>
                         <div id="tabWeather" class="tab">
                             <h5 class="cat">Weather Hazards (NOAA)</h5>
                             <ul class="catalog">
-                                <li><a href="#">3-7 Day Temperature Outlook<span>1</span></a></li>
-                                <li><a href="#">3-7 Day Precipitation Outlook<span>1</span></a></li>
-
-                                <li>
-                                    <a href="#">
-                                        3-7 Day WildFire/Drought<span>1</span>
-                                    </a>
-                                </li>
-
+                              
                             </ul>
                         </div>
                         <div id="tabEarthquakes" class="tab">
                             <h5 class="cat">Earthquakes (USGS)</h5>
                             <ul class="catalog">
 
-                                <li>
-                                    <a href="#">
-                                        Earthquakes from last 7 days<span>0</span>
-                                    </a>
-                                </li>
-
+                               
                             </ul>
                         </div>
                         <div id="tabTsunami" class="tab">
@@ -136,16 +111,7 @@
                         <div id="tabGEMS" class="tab">
                             <h5 class="cat">Interior Geospatial Emergency Management System</h5>
                             <ul class="catalog">
-                                <li><a href="#">Floods<span>22</span></a></li>
-                                <li><a href="#">Earthquakes<span>22</span></a></li>
-                                <li><a href="#">Wildfires<span>22</span></a></li>
-                                <li>
-                                    <a href="#">
-                                        Warnings<span>22</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">Wind Conditions<span>22</span></a></li>
-                                <li><a href="#">Tide Stations <span>22</span></a></li>
+                                
                             </ul>
                         </div>
 

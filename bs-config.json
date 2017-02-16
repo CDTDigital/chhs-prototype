@@ -4,5 +4,6 @@
     "https" : false,
     "browser" : ["chrome"],
     "port":3000,
-    "ui":{"port":3001}
+    "ui":{"port":3001},
+    "cors":true
 }

@@ -213,6 +213,22 @@ h5.cat {
     display: none !important;
 }
 
+#coordinates{
+    position:absolute; 
+    padding:5px;
+    background-color:#fff;
+    /*right:0px; 
+    top:0px; */
+    color:#000; 
+    z-index:50;
+    filter:alpha(opacity=70); /* IE */
+    -moz-opacity:0.7; /* Mozilla */
+    opacity: 0.7; /* CSS3 */
+    top: 5%;
+    left: 50%;
+    transform: translate(-5%, -50%);
+}
+
 @media (min-width: 480px) {
     .map_open {
         display: none;
