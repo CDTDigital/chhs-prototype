@@ -11,10 +11,9 @@ var defaultUser =
 "Phone": "9165551213"
 }
 
-var insertDocuments = function(db, callback) {
-  // Get the documents collection 
+//insert defaultUser
+var insertDocuments = function(db, callback) {  
   var collection = db.collection('users')
-  // Insert some documents 
   collection.insertMany([defaultUser], function(err, result) {
     assert.equal(err, null)
     assert.equal(1, result.result.n)
@@ -24,10 +23,9 @@ var insertDocuments = function(db, callback) {
   });
 } 
 
+//change the phone number
 var updateDocument = function(db, callback) {
-  // Get the documents collection 
   var collection = db.collection('users');
-  // Update document where a is 2, set b equal to 1 
   collection.updateOne( defaultUser, { $set: { "Phone" : "9165551212" } }, function(err, result) {
     assert.equal(err, null);
     assert.equal(1, result.result.n);
@@ -36,10 +34,9 @@ var updateDocument = function(db, callback) {
   });  
 }
 
+//find single document
 var findDocuments = function(db, callback) {
-  // Get the documents collection 
   var collection = db.collection('users');
-  // Find some documents 
   collection.findOne({}, {_id: false},  function(err, docs) {
     assert.equal(err, null);    
     console.log("Found the following records");
