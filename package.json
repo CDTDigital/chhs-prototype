@@ -3,18 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "lite-server && node webapi.js",
+    "start": "lite-server & node webapi/webapi.js",
     "webapi": "node webapi/webapi.js",
     "test": "node test.js"
   },
   "author": "The iFish Group Inc",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "assert": "^1.4.1",
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
     "lite-server": "^2.2.2",
     "mongodb": "^2.2.24",
-    "sendmail": "^1.1.1"
+    "sendmail": "^1.1.1"    
+  },
+  "devDependencies": {
   }
 }

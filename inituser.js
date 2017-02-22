@@ -8,7 +8,10 @@ var defaultUser =
 {
 "Name": "Joe Smith",
 "Email": "jsmith@ifishgroup.com",
-"Phone": "9165551213"
+"Phone": "9165551213",
+"Provider": "@vtext.com",
+"SendEmail": true,
+"SendText": true
 }
 
 //insert defaultUser
