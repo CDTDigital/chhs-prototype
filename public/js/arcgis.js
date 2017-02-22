@@ -9,12 +9,12 @@ AMD specification not valid for old browsers (i.e. IE)
 var arcgis = {
 
   webmap: null,
-  featureLayerid : 'arcgis-layer',
+  featureLayerid: 'arcgis-layer',
 
   initializeMap: function () {
 
     var map;
-    
+
     require(["esri/map", "esri/geometry/webMercatorUtils", "esri/dijit/Popup", "esri/dijit/PopupTemplate", "dojo/dom-construct", "dojo/dom", "dojo/domReady!"], function (Map, webMercatorUtils, Popup, PopupTemplate, domConstruct, dom) {
 
       var popupOptions = {
@@ -26,7 +26,7 @@ var arcgis = {
 
       map = new Map("map_canvas", {
         basemap: "streets",
-        center: [-119.417931, 36.778259],
+        center: [-124.405, 37.854],
         zoom: 6,
         infoWindow: popup
       });
@@ -54,12 +54,19 @@ var arcgis = {
 
   addFeatureLayer: function (obj) {
 
-    arcgis.removeFeatureLayer();
-
     var map = arcgis.webmap;
     var api = obj.href;
     var layerid = obj.id;
     var where = obj.rel;
+    var desc = obj.title;
+
+    if(where == 'non-api')
+    {
+      app.loadForm(api);
+      return;
+    }
+
+    arcgis.removeFeatureLayer();
 
     require([
       "esri/map",
@@ -77,6 +84,10 @@ var arcgis = {
       domClass, domConstruct, on,
       Chart, theme
     ) {
+
+        esriConfig.defaults.io.corsDetection = false;
+
+        //dom.byId("coordinates").innerHTML = desc;
 
         var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
         var popup = new Popup({
@@ -124,7 +135,7 @@ var arcgis = {
     ],
       function (esriConfig, Map, ArcGISDynamicMapServiceLayer, ImageParameters) {
 
-        //TODO: Look into CORS
+        //We turn off all CORS detection because not all ArcGis servers support CORS
         esriConfig.defaults.io.corsDetection = false;
 
         var imageParameters = new ImageParameters();
@@ -164,10 +175,38 @@ var arcgis = {
 
     var layer = map.getLayer(arcgis.featureLayerid);
 
-    if(layer == undefined) return;
+    if (layer == undefined) return;
 
     map.removeLayer(layer);
 
+  }
+
+};
+
+var arcgisEarthquakes = {
+
+  api: "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Earthquakes/EarthquakesFromLastSevenDays/MapServer",
+  earthquakelayerid: 0,
+  earthquakelayerdesc: "This sample service represents the latest earthquakes for the last seven days from the USGS. Data for this service is updated every 10 minutes from the USGS CSV repository.",
+  whereurlclause : "Region+like+%27%25California%25%27",
+  whereclause: "Region like '%California'",
+
+  isloaded: false,
+
+
+  getEarthquakeCount: function () {
+
+    return 'All';
+
+    //TODO:  Need to look into CORS Failure
+    var url = '{0}/{1}/query?where={2}&returnCountOnly=true&f=pjson'.format(this.api, this.earthquakelayerid, this.whereurlclause);
+
+    return $.getJSON(url)
+      .then(function (data) {
+        return data.count;
+      }).fail(function (d) {
+        console.error("getEarthquakeCount failed, stack: " + d.stack + ", error: " + d.message);
+      });
   }
 
 };
@@ -176,7 +215,9 @@ var arcgisActiveFire = {
 
   api: "https://wildfire.cr.usgs.gov/arcgis/rest/services/geomac_dyn/MapServer",
   currentfirelayerid: 0,
+  currentfiredesc: "",
   lastyearfirelayerid: 7,
+  lastyearfirelayerdesc:"",
   whereclause: "state='CA'",
 
   isloaded: false,
@@ -209,7 +250,9 @@ var arcgisRiverGauge = {
 
   api: "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/ahps_riv_gauges/MapServer",
   riverstageslayerid: 0,
+  riverstageslayerdesc: "",
   fullforecastlayerid: 13,
+  fullforecastlayerdesc:"",
   whereclause: "state='CA'",
 
   isloaded: false,
@@ -239,7 +282,9 @@ var arcgisWeatherHazard = {
 
   api: "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Climate_Outlooks/cpc_weather_hazards/MapServer",
   temperaturelayerid: 1,
+  temperaturelayerdesc:"",
   precipitationlayerid: 4,
+  precipitationlayerdesc:"",
   whereclause: null,
 
   isloaded: false,
@@ -277,35 +322,4 @@ var arcgisWeatherHazard = {
 
 };
 
-var arcgisGEMS = {
-
-  api: "https://igems.doi.gov/arcgis/rest/services/igems_haz/MapServer",
-  earthquakelayerid: 3,
-  wildfirelayerid: 10,
-  whereclause: "location+like+%27%25California%27",
-  whereclause2: "state='CA'",
-
-  isloaded: false,
-
-  getEarthquakeCount: function () {
-    var url = '{0}/{1}/query?where={2}&returnCountOnly=true&f=pjson'.format(this.api, this.earthquakelayerid, this.whereclause);
-    return $.getJSON(url)
-      .then(function (data) {
-        return data.count;
-      }).fail(function (jqxhr, textstatus) {
-        console.error("getEarthquakeCount failed. Error: " + textstatus);
-      });
-  },
-
-  getWildfireCount: function () {
-    var url = '{0}/{1}/query?where={2}&returnCountOnly=true&f=pjson'.format(this.api, this.wildfirelayerid, this.whereclause2);
-    return $.getJSON(url)
-      .then(function (data) {
-        return data.count;
-      }).fail(function (jqxhr, textstatus) {
-        console.error("getWildfireCount failed. Error: " + textstatus);
-      });
-  }
-
-};
 

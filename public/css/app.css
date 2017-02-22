@@ -5,28 +5,45 @@
     box-sizing: border-box;
 }
 
-body {
-    height: 100%;
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+
+   height: 100%;
 }
 
-html {
+body {
     height: 100%;
+    font-family: "Source Sans Pro"
 }
+
+
+
 
 .site {
     height: 100%;
     margin: 0px;
+    font-family: "Source Sans Pro"
 }
 
 /*main menu styles*/
 .main_menu {
-    background: #003466;
+    background: #112e51;
     height: 100%;
     z-index: 8;
     position: fixed;
     max-width: 50px;
-    box-shadow: inset -1px 0px 1px #003466;
-    border-right: 1px solid #003466;
+    box-shadow: inset -1px 0px 1px #112e51;
+    border-right: 1px solid #112e51;
     padding-right: 0px;
     padding-left: 0px;
 }
@@ -53,12 +70,10 @@ html {
 
                 .main_menu ul li a:hover {
                     font-weight: normal;
-                    background: #005e90;
+                    background: #046b99;
                     font-size: 22px;
                     padding: 15px 13px;
-                    border-top: 1px solid #030405;
-                    border-bottom: 1px solid #030405;
-                    display: block;
+                     display: block;
                     margin-bottom: -1px;
                     color: #BD9408;
                     text-decoration: none;
@@ -75,14 +90,14 @@ html {
 }
 
     .inner .active i {
-        color: #003466;
+        color: #112e51;
     }
 
 /*sidebar*/
 .side-bar {
     background: #ffffff;
     margin-left: 50px;
-    max-width: 240px;
+    max-width: 340px;
     min-height: 100%;
     box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.22);
     margin-bottom: 0px;
@@ -103,17 +118,21 @@ html {
 }
 
 /*Catalog menu*/
-#tabs div {
+#tabs div.tab {
     display: none;
 }
 
     #tabs div p {
         font-size: 14px;
+        font-family: "Source Sans Pro";
+        font-weight: 400;
     }
 
 #tabs .active {
     display: block !important;
 }
+
+
 
 .catalog {
     padding: 0px;
@@ -130,7 +149,9 @@ html {
             padding: 8px 10px;
             border-bottom: 1px solid #e7e7e7;
             font-weight: normal;
-            font-size: 12px;
+            font-size: 14px;
+            font-family: "Source Sans Pro";
+            font-weight: 400;
             display: block;
             float: left;
             width: 100%;
@@ -149,15 +170,15 @@ html {
 
         .catalog li span {
             float: right;
-            color: #c8c8c8;
-            font-size: 9px;
+            color: #112e51;
+            font-size: 12px;
             padding: 3px;
         }
 
     .catalog .activepoint, .catalog .activepoint:hover {
-        background: #005e90; /* Old browsers */
+        background: #005e90; 
         color: #ffffff;
-        font-weight: 300;
+        font-weight: 400;
         margin-top: -1px;
         margin-bottom: -1px;
         z-index: 1;
@@ -166,10 +187,10 @@ html {
         .catalog .activepoint span {
             background: #F3CF5D;
             padding: 3px;
-            font-size: 9px;
+            font-size: 12px;
             border-radius: 3px;
             box-shadow: inset 0px 1px 0px #FBAD23, 0px 1px 0px #FBAD23;
-            color: #003466;
+            color: #112e51;
         }
 
 .activepoint .arrow {
@@ -184,11 +205,41 @@ html {
 
 h5.cat {
     color: #BD9408;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 17px;
+    font-family: "Merriweather";
+    font-weight: 700;
     margin-top: 0px;
 }
 
+/*Form layout and menu*/
+
+div.top-space
+{
+    padding-top: 30px
+}
+
+.form-catalog {
+    padding: 0px;
+}
+
+
+    .form-catalog li {
+        list-style: none;
+         float:left;
+         padding: 5px;
+    }
+
+        .caform-catalogtalog li a {
+            color: #5d8eae;
+            padding: 8px 10px;
+            font-weight: normal;
+            font-size: 14px;
+            font-family: "Source Sans Pro";
+            font-weight: 400;
+            display: block;
+            float: left;
+            width: 100%;
+        }
 
 /*map*/
 .map {
@@ -228,6 +279,9 @@ h5.cat {
     left: 50%;
     transform: translate(-5%, -50%);
 }
+
+/*Misc*/
+
 .claro .dijitTooltipContainer {
       background-image: none;
       border:           1px solid #444444;
@@ -238,7 +292,8 @@ h5.cat {
     .claro .dijitTooltipConnector {
       background-image: none;
     }
-    
+
+
 @media (min-width: 480px) {
     .map_open {
         display: none;
@@ -255,7 +310,7 @@ h5.cat {
         display: block;
         text-align: center;
         padding: 15px;
-        background: #003466;
+        background: #112e51;
         margin: 0px;
         border-radius: 4px;
         color: #ffffff;

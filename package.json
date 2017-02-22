@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start" : "lite-server"
+    "start": "lite-server"
   },
   "author": "The iFish Group Inc",
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.2.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.1",
+    "connect-cors": "^0.5.6"
   }
 }

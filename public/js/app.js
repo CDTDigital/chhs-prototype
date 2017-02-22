@@ -11,7 +11,7 @@ var app = {
             $(".inner ul li a").removeClass("active");
             $("#tabs .active").removeClass("active");
             $(this).addClass("active");
-            $("#tabs div").stop(false, false).hide();
+            $("#tabs div.tab").stop(false, false).hide();
             $(tab_id).stop(false, false).show();
 
             helper.showCatalog(tab_id);
@@ -44,6 +44,28 @@ var app = {
 
     },
 
+    bindFormElements: function () {
+
+        $('body').on('click', 'ul.form-catalog li a', function (e) {
+            e.preventDefault();
+            arcgis.addFeatureLayer($(this)[0]);
+        });
+
+        $('body').on('click', 'a.btn.btn-primary', function (e) {
+            e.preventDefault();
+            arcgis.addFeatureLayer($(this)[0]);
+        });
+
+    },
+
+    loadForm: function (formUrl) {
+
+
+        $("div#tabWelcome").load(formUrl);
+        return false;
+
+
+    }
 
 };
 
@@ -53,12 +75,28 @@ var helper = {
     showCatalog: function (catalog) {
 
         switch (catalog) {
+
+            case "#tabEarthquakes":
+                if (!arcgisEarthquakes.isloaded) {
+                    $.when(arcgisEarthquakes.getEarthquakeCount()).done(function (earthquake) {
+
+                        addCatalogLink(catalog, arcgisEarthquakes.api, arcgisEarthquakes.earthquakelayerid, arcgisEarthquakes.whereclause, 'Earthquakes from last 7 days', arcgisEarthquakes.earthquakelayerdesc, earthquake);
+
+                        arcgisEarthquakes.isloaded = true;
+
+                    }).fail(function (jsxhr, tetxstatus) {
+
+                    });
+
+                }
+                break;
+
             case "#tabActiveFire":
                 if (!arcgisActiveFire.isloaded) {
                     $.when(arcgisActiveFire.getCurrentFireCount(), arcgisActiveFire.getLastYearFireCount()).done(function (current, lastyear) {
 
-                        addCatalogLink(catalog, arcgisActiveFire.api, arcgisActiveFire.currentfirelayerid, arcgisActiveFire.whereclause, 'Current Fires', current);
-                        addCatalogLink(catalog, arcgisActiveFire.api, arcgisActiveFire.lastyearfirelayerid, arcgisActiveFire.whereclause, 'Last Year Fires', lastyear);
+                        addCatalogLink(catalog, arcgisActiveFire.api, arcgisActiveFire.currentfirelayerid, arcgisActiveFire.whereclause, 'Current Fires', arcgisActiveFire.currentfiredesc, current);
+                        addCatalogLink(catalog, arcgisActiveFire.api, arcgisActiveFire.lastyearfirelayerid, arcgisActiveFire.whereclause, 'Last Year Fires', arcgisActiveFire.lastyearfirelayerdesc, lastyear);
 
                         arcgisActiveFire.isloaded = true;
 
@@ -74,8 +112,8 @@ var helper = {
                 if (!arcgisRiverGauge.isloaded) {
                     $.when(arcgisRiverGauge.getRiverStagesCount(), arcgisRiverGauge.getFullForecastCount()).done(function (riverstage, fullforecast) {
 
-                        addCatalogLink(catalog, arcgisRiverGauge.api, arcgisRiverGauge.riverstageslayerid, arcgisRiverGauge.whereclause, 'Observed River Stages', riverstage);
-                        addCatalogLink(catalog, arcgisRiverGauge.api, arcgisRiverGauge.fullforecastlayerid, arcgisRiverGauge.whereclause, 'Full Forecast Period Stages', fullforecast);
+                        addCatalogLink(catalog, arcgisRiverGauge.api, arcgisRiverGauge.riverstageslayerid, arcgisRiverGauge.whereclause, 'Observed River Stages', arcgisRiverGauge.riverstageslayerdesc, riverstage);
+                        addCatalogLink(catalog, arcgisRiverGauge.api, arcgisRiverGauge.fullforecastlayerid, arcgisRiverGauge.whereclause, 'Full Forecast Period Stages', arcgisRiverGauge.fullforecastlayerdesc, fullforecast);
 
                         arcgisRiverGauge.isloaded = true;
 
@@ -91,8 +129,8 @@ var helper = {
                 if (!arcgisWeatherHazard.isloaded) {
                     $.when(arcgisWeatherHazard.getTemperatureCount(), arcgisWeatherHazard.getPrecipitationCount()).done(function (temp, precip) {
 
-                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.temperaturelayerid, arcgisWeatherHazard.whereclause, '3-7 Day Temperature Outlook', temp);
-                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.precipitationlayerid, arcgisWeatherHazard.whereclause, '3-7 Day Precipitation Outlook', precip);
+                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.temperaturelayerid, arcgisWeatherHazard.whereclause, '3-7 Day Temperature Outlook', arcgisWeatherHazard.temperaturelayerdesc, temp);
+                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.precipitationlayerid, arcgisWeatherHazard.whereclause, '3-7 Day Precipitation Outlook', arcgisWeatherHazard.precipitationlayerdesc, precip);
 
                         arcgisWeatherHazard.isloaded = true;
 
@@ -103,23 +141,6 @@ var helper = {
 
                 }
                 break;
-            //TODO: Look into why Earthquakes Last 24 Hours is failing
-            case "#tabGEMS":
-                if (!arcgisGEMS.isloaded) {
-                    $.when(arcgisGEMS.getEarthquakeCount(),arcgisGEMS.getWildfireCount()).done(function (earthquake,wildfire) {
-
-                        addCatalogLink(catalog, arcgisGEMS.api, arcgisGEMS.earthquakelayerid, arcgisGEMS.whereclause, 'Earthquakes Last 24 Hours', earthquake);
-                        addCatalogLink(catalog, arcgisGEMS.api, arcgisGEMS.wildfirelayerid, arcgisGEMS.whereclause2, 'Active Wildfires', wildfire);
-
-                        arcgisGEMS.isloaded = true;
-
-                    }).fail(function (jsxhr, tetxstatus) {
-
-                    });
-
-                }
-                break;
-
 
 
         }
@@ -161,10 +182,10 @@ String.prototype.format = function () {
 };
 
 
-function addCatalogLink(catalog, href, layerid, where, title, count) {
+function addCatalogLink(catalog, href, layerid, where, link, description, count) {
 
     var dom = catalog + ' ul.catalog';
-    var html = '<li><a href="{0}" id="{1}" rel="{2}">{3}<span>{4}</span></a></li>'.format(href, layerid, where, title, count);
+    var html = '<li><a href="{0}" id="{1}" rel="{2}" title="{3}">{4}<span>{5}</span></a></li>'.format(href, layerid, where, description, link, count);
 
     $(dom).append(html);
 }
