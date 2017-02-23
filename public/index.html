@@ -1,15 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <title>ADPQ Prototype - Sources</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css" />
-    <link href="css/app.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="css/whhg.css">
-    <!-- If needed: HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes/claro/claro.css">
+        <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css" />
+        <link rel="stylesheet" href="css/whhg.css">
+        <link rel="stylesheet" href="css/uswds.css">
+        <link href="css/app.css" rel="stylesheet" media="screen">
+        
+        <!-- If needed: HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 </head>
+
 <body>
 
     <a href="#" class="btn btn-danger btn-sm btm-zindex none" id="show_cont">Show content</a>
@@ -24,8 +29,9 @@
                     <a href="tabWelcome" class="active"><i class="icon-home"></i></a>
                 </li>
                 <li>
-                    <a href="tabActiveFire"><i class="icon-fire"></i></a>
+                    <a href="tabEarthquakes"><i class="icon-zodiac-aquarius"></i></a>
                 </li>
+
                 <li>
                     <a href="tabRiverGauge"><i class="icon-bandwidth"></i></a>
                 </li>
@@ -33,8 +39,9 @@
                     <a href="tabWeather"><i class="icon-rain"></i></a>
                 </li>
                 <li>
-                    <a href="tabGEMS"><i class="icon-world"></i></a>
+                    <a href="tabActiveFire"><i class="icon-fire"></i></a>
                 </li>
+
 
 
             </ul>
@@ -64,36 +71,31 @@
                 <div class="col-md-12">
                     <div id="tabs">
                         <div id="tabWelcome" class="active tab">
-                            <h5 class="cat">Welcome</h5>
-
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-                            </p>
-
+                            
                         </div>
                         <div id="tabActiveFire" class="tab">
                             <h5 class="cat">Active Fire Boundaries</h5>
+                            <p></p>
                             <ul class="catalog">
                             </ul>
                         </div>
                         <div id="tabRiverGauge" class="tab">
                             <h5 class="cat">River Gauge - Current and Forecast (NOAA)</h5>
                             <ul class="catalog">
-                                
+
                             </ul>
                         </div>
                         <div id="tabWeather" class="tab">
                             <h5 class="cat">Weather Hazards (NOAA)</h5>
                             <ul class="catalog">
-                              
+
                             </ul>
                         </div>
                         <div id="tabEarthquakes" class="tab">
                             <h5 class="cat">Earthquakes (USGS)</h5>
                             <ul class="catalog">
 
-                               
+
                             </ul>
                         </div>
                         <div id="tabTsunami" class="tab">
@@ -112,7 +114,7 @@
                         <div id="tabGEMS" class="tab">
                             <h5 class="cat">Interior Geospatial Emergency Management System</h5>
                             <ul class="catalog">
-                                
+
                             </ul>
                         </div>
 
@@ -124,21 +126,26 @@
 
         </div>
     </div>
-    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script defer src="https://js.arcgis.com/3.19/"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.3.6/alasql.min.js"></script>
-    <script src="js/arcgis.js"></script>
-    <script src="js/app.js"></script>
-    <script>
-        $(function () {
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+            <script defer src="https://js.arcgis.com/3.19/"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.3.6/alasql.min.js"></script>
+            <script src="js/arcgis.js"></script>
+            <script src="js/app.js"></script>
+            <script>
+                $(function () {
 
-            arcgis.initializeMap();
-            app.bindMenu();
-            app.bindCatalog();
-            app.bindButtons();
+                    app.loadForm('form/welcome.html');
+                    arcgis.initializeMap();
+                    app.bindMenu();
+                    app.bindCatalog();
+                    app.bindButtons();
+                    app.bindFormElements();
 
-        });
-    </script>
+                });
+            </script>
 </body>
+
 </html>

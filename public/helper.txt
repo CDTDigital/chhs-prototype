@@ -111,3 +111,57 @@ git commit -m "Remove duplicated directory"
 git push origin <your-git-branch> (typically 'master', but not always)
 
 git config --list --show-origin
+
+CORS
+http://stackoverflow.com/a/37767179
+
+var arcgisGEMS = {
+
+  api: "https://igems.doi.gov/arcgis/rest/services/igems_haz/MapServer",
+  earthquakelayerid: 3,
+  wildfirelayerid: 10,
+  whereclause: "location+like+%27%25California%27",
+  whereclause_layerfix: "location like '%California'",
+  whereclause2: "state='CA'",
+
+  isloaded: false,
+
+  getEarthquakeCount: function () {
+    var url = '{0}/{1}/query?where={2}&returnCountOnly=true&f=pjson'.format(this.api, this.earthquakelayerid, this.whereclause);
+    return $.getJSON(url)
+      .then(function (data) {
+        return data.count;
+      }).fail(function (jqxhr, textstatus) {
+        console.error("getEarthquakeCount failed. Error: " + textstatus);
+      });
+  },
+
+  getWildfireCount: function () {
+    var url = '{0}/{1}/query?where={2}&returnCountOnly=true&f=pjson'.format(this.api, this.wildfirelayerid, this.whereclause2);
+    return $.getJSON(url)
+      .then(function (data) {
+        return data.count;
+      }).fail(function (jqxhr, textstatus) {
+        console.error("getWildfireCount failed. Error: " + textstatus);
+      });
+  }
+
+};
+
+//TODO: Look into why Earthquakes Last 24 Hours is failing
+            case "#tabGEMS":
+                if (!arcgisGEMS.isloaded) {
+                    $.when(arcgisGEMS.getEarthquakeCount(),arcgisGEMS.getWildfireCount()).done(function (earthquake,wildfire) {
+
+                        addCatalogLink(catalog, arcgisGEMS.api, arcgisGEMS.earthquakelayerid, arcgisGEMS.whereclause_layerfix, 'Earthquakes Last 24 Hours', earthquake);
+                        addCatalogLink(catalog, arcgisGEMS.api, arcgisGEMS.wildfirelayerid, arcgisGEMS.whereclause2, 'Active Wildfires', wildfire);
+
+                        arcgisGEMS.isloaded = true;
+
+                    }).fail(function (jsxhr, tetxstatus) {
+
+                    });
+
+                }
+                break;
+
