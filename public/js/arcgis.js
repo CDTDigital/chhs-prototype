@@ -60,12 +60,6 @@ var arcgis = {
     var where = obj.rel;
     var desc = obj.title;
 
-    if(where == 'non-api')
-    {
-      app.loadForm(api);
-      return;
-    }
-
     arcgis.removeFeatureLayer();
 
     require([

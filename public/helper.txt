@@ -165,3 +165,10 @@ var arcgisGEMS = {
                 }
                 break;
 
+
+                docker run -p 27017:27017 --name some-mongo -d mongo
+                docker ps
+                chhs-prototype> docker exec -it some-mongo /bin/sh
+                show collections
+                db.getName()
+

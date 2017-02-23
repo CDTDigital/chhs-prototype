@@ -1,1 +1,86 @@
-<h5 class="cat">User Profile</h5>
+<h5 class="cat">Welcome </h5>
+<form class='uswds-form' method="post">
+    <div class="form-group">
+        <label for="firstname">First name:</label>
+        <input type="text" class="form-control" id="firstname" name="firstname">
+    </div>
+    <div class="form-group">
+        <label for="lastname">Last name:</label>
+        <input type="text" class="form-control" id="lastname" name="lastname">
+    </div>
+    <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" class="form-control" id="email" name="email">
+    </div>
+
+    <div class="form-group">
+        <label for="phonenumber">Phone number:</label>
+        <input type="tel" class="form-control" id="phonenumber" name="phonenumber">
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" id="receivetext" name="receivetext">Receive text</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" id="receiveemail" name="receiveemail">Receive email</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save profile</button>
+</form>
+<div class="top-space"></div>
+<ul class="form-catalog">
+    <li><a href="form/welcome.html">Logout</a></li>
+</ul>
+
+<script>
+    $(function () {
+
+        //TODO: Use template engine jsrender/jsviews
+
+        var url = app.userprofileApi;
+
+        $.getJSON(url)
+            .then(function (data) {
+                $('h5.cat').html('Welcome ' + data.Name + ',');
+                $('#firstname').val(data.FirstName);
+                $('#lastname').val(data.LastName);
+                $('#email').val(data.Email);
+                $('#phonenumber').val(data.Phone);
+                $('#receivetext').attr('checked', data.ReceiveText);
+                $('#receiveemail').attr('checked', data.ReceiveEmail);
+            }).fail(function (d) {
+                console.error("User Profile Form; Error: " + d);
+            });
+
+        $("form").submit(function () {
+
+            var submitdata = { Name: null, FirstName: null, LastName: null, Email: null, Phone: null, ReceiveText: null, ReceiveEmail: null };
+
+            submitdata.Name = $('#firstname').val() + ' ' + $('#lastname').val();
+            submitdata.FirstName = $('#firstname').val();
+            submitdata.LastName = $('#lastname').val();
+            submitdata.Phone = $('#phonenumber').val();
+            submitdata.Email = $('#email').val();
+            submitdata.ReceiveText = $('#receivetext').prop('checked');
+            submitdata.ReceiveEmail = $('#receiveemail').prop('checked');
+
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(submitdata),
+                // xhrFields: {
+                //     withCredentials: true
+                // },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log('Update Error occurred - ' + error);
+                }
+            });
+
+            return false;
+        });
+
+    })
+
+</script>
