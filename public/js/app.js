@@ -1,6 +1,8 @@
 
 var app = {
 
+    userprofileApi: "http://localhost:8081/userprofile",
+
     bindMenu: function () {
 
         $(".inner ul li a").click(function (e) {
@@ -48,23 +50,18 @@ var app = {
 
         $('body').on('click', 'ul.form-catalog li a', function (e) {
             e.preventDefault();
-            arcgis.addFeatureLayer($(this)[0]);
+            app.loadForm($(this)[0].href);
         });
 
         $('body').on('click', 'a.btn.btn-primary', function (e) {
             e.preventDefault();
-            arcgis.addFeatureLayer($(this)[0]);
+            app.loadForm($(this)[0].href);
         });
 
     },
 
     loadForm: function (formUrl) {
-
-
         $("div#tabWelcome").load(formUrl);
-        return false;
-
-
     }
 
 };
