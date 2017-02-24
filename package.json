@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+<<<<<<< HEAD
     "start": "lite-server",
+=======
+    "start": "lite-server & node webapi/webapi.js",
+>>>>>>> a1e392a2b86f8e92037fe4dd40733ea58d893ffa
     "webapi": "node webapi/webapi.js",
     "test": "node test.js"
   },
@@ -20,6 +24,10 @@
     "express": "^4.14.1",
     "lite-server": "^2.2.2",
     "mongodb": "^2.2.24",
+<<<<<<< HEAD
     "sendmail": "^1.1.1"
+=======
+    "sendmail": "^1.1.1"    
+>>>>>>> a1e392a2b86f8e92037fe4dd40733ea58d893ffa
   }
 }
