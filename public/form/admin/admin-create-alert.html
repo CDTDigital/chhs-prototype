@@ -1,0 +1,48 @@
+<h5 class="cat">Admin Create Alert</h5>
+<form class='uswds-form' method="post">
+    <div class="form-group">
+        <label for="title">Alert Radius:</label>
+        <a href='#' id="lnkRadius">Select Radius</a>&nbsp;|&nbsp;<a href='#' id="lnkClearRadius">Clear Radius</a>
+    </div>
+    <div class="form-group">
+        <label for="title">Alert Title:</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="form-group">
+        <label for="comment">Alert Description:</label>
+        <textarea class="form-control" rows="5" id="comment" required></textarea>
+    </div>
+    <div class="form-group">
+        <div class="radio">
+            <label><input type="radio" name="optradio" value="emergency">Emergency</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="optradio" value="non-emergency" checked>Non-Emergency</label>
+        </div>
+    </div>
+    <div id="results"></div>
+    <button type="submit" class="btn btn-danger">Send alert</button>
+</form>
+<!--<button id="btnAlert" class="btn btn-danger">Create alert and send</button>-->
+
+<div class="top-space"></div>
+<ul class="form-catalog">
+    <li><a href="form/admin/admin.html">Control Panel</a></li>
+    <li><a href="form/welcome.html">Logout</a></li>
+</ul>
+
+<script>
+    $(function () {
+
+
+        $("form").validate();
+
+        $("form").submit(function (e) {
+
+            e.preventDefault();
+
+          });  
+
+    })
+
+</script>

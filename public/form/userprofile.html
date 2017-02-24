@@ -41,7 +41,7 @@
 
         $.getJSON(url)
             .then(function (data) {
-                $('h5.cat').html('Welcome ' + data.Name);
+                $('#tabWelcome h5.cat').html('Welcome ' + data.Name);
                 $('#firstname').val(data.FirstName);
                 $('#lastname').val(data.LastName);
                 $('#email').val(data.Email);
@@ -87,11 +87,13 @@
                 // },
                 success: function (data) {
                     $('#results')
+                    .show()
                     .html('<div class="alert alert-success"><strong>Success!</strong>  User profile was successfully update!</div>')
                     .fadeOut(5000);
                 },
                 error: function (error) {
                     $('#results')
+                    .show()
                     .html('<div class="alert alert-danger"><strong>Ooops!</strong> Error saving user profile!</div>')
                     .fadeOut(5000);
                 }

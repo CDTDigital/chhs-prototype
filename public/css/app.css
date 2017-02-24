@@ -245,6 +245,10 @@ input.form-control.error
 {
     border-color: #ff0000
 }
+textarea.form-control.error
+{
+    border-color: #ff0000
+}
 label.error
 {
     color: #ff0000
@@ -319,6 +323,24 @@ span#service span
  background-color: #000;
  color:#fff*/
 }
+
+a.label.label-default
+{
+    background-color: #981b1e !important;
+    color: #fff !important;
+    text-decoration: none;
+}
+a.label.label-default:hover
+{
+    background-color:#cd2026 !important;
+}
+
+/*remove ability to maximize ersi popup window*/
+div.titleButton.maximize
+{
+    display: none !important;
+}
+
 /*Override Esri Style*/
 .esriPopupMobile
 {
