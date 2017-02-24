@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>ADPQ Prototype - Sources</title>
+    <title>ADPQ Prototype - The iFish Group</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
@@ -19,7 +19,7 @@
 
     <a href="#" class="btn btn-danger btn-sm btm-zindex none" id="show_cont">Show content</a>
     <div id="map_canvas" class="map">
-        <span id="coordinates"></span>
+        <div id="coordinates"><span id="service"></span><span id="latlong"></span></div>
     </div>
     <div class="row site">
         <div class="col-md-1 main_menu inner">
@@ -75,28 +75,31 @@
                         </div>
                         <div id="tabActiveFire" class="tab">
                             <h5 class="cat">Active Fire Boundaries</h5>
-                            <p></p>
+                            <p>This service allows users in remote locations to manipulate map information displays, zoom in and out to display fire information at various scales and detail, and print hard copy maps for use in fire information and media briefings, dispatch offices and coordination centers.</p>
                             <ul class="catalog">
                             </ul>
                         </div>
                         <div id="tabRiverGauge" class="tab">
                             <h5 class="cat">River Gauge - Current and Forecast (NOAA)</h5>
+                            <p>Advanced Hydrologic Prediction Service (AHPS) River Gauge Current and Forecast Flood Stages.  River Gauge current stages and forecasted river stages out to 336 hours</p>
                             <ul class="catalog">
 
                             </ul>
                         </div>
                         <div id="tabWeather" class="tab">
                             <h5 class="cat">Weather Hazards (NOAA)</h5>
+                            <p>Temperature, precipitation, flooding, high winds, high waves, and wildfire/drought hazards for the U.S. through 14 days.</p>
                             <ul class="catalog">
 
                             </ul>
                         </div>
                         <div id="tabEarthquakes" class="tab">
                             <h5 class="cat">Earthquakes (USGS)</h5>
+                            <p>This service represents the latest earthquakes for the last seven days from the USGS. Data for this service is updated every 10 minutes from the USGS CSV repository.</p>
+                            
                             <ul class="catalog">
-
-
                             </ul>
+                            
                         </div>
                         <div id="tabTsunami" class="tab">
                             <h5 class="cat">Tsunami (NOAA)</h5>
@@ -128,6 +131,8 @@
     </div>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
+        <script src="http://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
             <script defer src="https://js.arcgis.com/3.19/"></script>
@@ -137,8 +142,8 @@
             <script>
                 $(function () {
 
-                    app.loadForm('form/welcome.html');
                     arcgis.initializeMap();
+                    app.loadForm('form/welcome.html');
                     app.bindMenu();
                     app.bindCatalog();
                     app.bindButtons();

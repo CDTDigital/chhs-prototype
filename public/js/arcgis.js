@@ -43,7 +43,7 @@ var arcgis = {
         //the map is in web mercator but display coordinates in geographic (lat, long)
         var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);
         //display mouse coordinates
-        dom.byId("coordinates").innerHTML = mp.x.toFixed(3) + ", " + mp.y.toFixed(3);
+        dom.byId("latlong").innerHTML = mp.x.toFixed(3) + ", " + mp.y.toFixed(3);
       }
 
       arcgis.webmap = map;
@@ -58,13 +58,15 @@ var arcgis = {
     var api = obj.href;
     var layerid = obj.id;
     var where = obj.rel;
-    var desc = obj.title;
+    var desc = obj.hreflang;
 
     arcgis.removeFeatureLayer();
 
     require([
       "esri/map",
+      "esri/request",
       "esri/dijit/Popup", "esri/dijit/PopupTemplate",
+      "esri/dijit/PopupMobile",
       "esri/layers/FeatureLayer",
       "esri/symbols/SimpleFillSymbol", "esri/Color",
       "dojo/dom-class", "dojo/dom-construct", "dojo/on",
@@ -72,7 +74,9 @@ var arcgis = {
       "dojo/domReady!"
     ], function (
       Map,
+      esriRequest,
       Popup, PopupTemplate,
+      PopupMobile,
       FeatureLayer,
       SimpleFillSymbol, Color,
       domClass, domConstruct, on,
@@ -81,20 +85,37 @@ var arcgis = {
 
         esriConfig.defaults.io.corsDetection = false;
 
-        //dom.byId("coordinates").innerHTML = desc;
+        $('span#service').html($(obj).html());
 
         var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
-        var popup = new Popup({
-          fillSymbol: fill,
-          titleInBody: false
-        }, domConstruct.create("div"));
+        var popup;
+
+        if (helper.isMobile()) {
+          popup = new PopupMobile({
+            fillSymbol: fill,
+            titleInBody: false
+          }, domConstruct.create("div"));
+        }
+        else {
+          popup = new Popup({
+            fillSymbol: fill,
+            titleInBody: false
+          }, domConstruct.create("div"));
+        }
+
+
+
 
         map.setInfoWindow(popup);
 
-        var template = new PopupTemplate({
-          title: "Title Goes Here",
-          description: "Ernie Lopez"
-        });
+        // var template = new PopupTemplate({
+        //   title: "Title Goes Here",
+        //   description: "Ernie Lopez"
+        // });
+
+        var template = new PopupTemplate();
+        template.setTitle("The iFish Group Notification");
+        template.setContent(desc);
 
         var featureLayer = new FeatureLayer("{0}/{1}".format(api, layerid), {
           mode: FeatureLayer.MODE_ONDEMAND,
@@ -171,7 +192,9 @@ var arcgis = {
 
     if (layer == undefined) return;
 
+    map.infoWindow.hide();
     map.removeLayer(layer);
+    map.setZoom(6);
 
   }
 
@@ -181,8 +204,8 @@ var arcgisEarthquakes = {
 
   api: "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Earthquakes/EarthquakesFromLastSevenDays/MapServer",
   earthquakelayerid: 0,
-  earthquakelayerdesc: "This sample service represents the latest earthquakes for the last seven days from the USGS. Data for this service is updated every 10 minutes from the USGS CSV repository.",
-  whereurlclause : "Region+like+%27%25California%25%27",
+  earthquakelayerdesc: "<b>Region</b>: ${region} <br><b>Date</b>: ${datetime} <br><b>Magnitude </b>: ${magnitude}<br><b>Latitude </b>: ${latitude}<br><b>Longitude </b>: ${longitude}",
+  whereurlclause: "Region+like+%27%25California%25%27",
   whereclause: "Region like '%California'",
 
   isloaded: false,
@@ -190,7 +213,7 @@ var arcgisEarthquakes = {
 
   getEarthquakeCount: function () {
 
-    return 'All';
+    return '99+';
 
     //TODO:  Need to look into CORS Failure
     var url = '{0}/{1}/query?where={2}&returnCountOnly=true&f=pjson'.format(this.api, this.earthquakelayerid, this.whereurlclause);
@@ -209,9 +232,9 @@ var arcgisActiveFire = {
 
   api: "https://wildfire.cr.usgs.gov/arcgis/rest/services/geomac_dyn/MapServer",
   currentfirelayerid: 0,
-  currentfiredesc: "",
+  currentfiredesc: "<b>Report Date </b>: ${reportdatetime} <br/><b>Fire Name </b>: ${incidentname}<br/><b>Cause</b>: ${firecause} <br><b>Acres</b>: ${acres}<br><b>Latitude </b>: ${latitude}<br><b>Longitude </b>: ${longitude}",
   lastyearfirelayerid: 7,
-  lastyearfirelayerdesc:"",
+  lastyearfirelayerdesc: "<b>Report Date </b>: ${reportdatetime} <br/><b>Fire Name </b>: ${incidentname}<br/><b>Cause</b>: ${firecause} <br><b>Acres</b>: ${acres}<br><b>Latitude </b>: ${latitude}<br><b>Longitude </b>: ${longitude}",
   whereclause: "state='CA'",
 
   isloaded: false,
@@ -244,9 +267,9 @@ var arcgisRiverGauge = {
 
   api: "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/ahps_riv_gauges/MapServer",
   riverstageslayerid: 0,
-  riverstageslayerdesc: "",
+  riverstageslayerdesc: "<b>Location  </b>: ${location} <br/><b>Water Body </b>: ${waterbody}<br><b>Latitude </b>: ${latitude}<br><b>Longitude </b>: ${longitude}",
   fullforecastlayerid: 13,
-  fullforecastlayerdesc:"",
+  fullforecastlayerdesc: "<b>Location  </b>: ${location} <br/><b>Water Body </b>: ${waterbody}<br><b>Status </b>: ${status}<br><b>Forecast</b>: ${forecast}<br><b>Latitude </b>: ${latitude}<br><b>Longitude </b>: ${longitude}",
   whereclause: "state='CA'",
 
   isloaded: false,
@@ -276,9 +299,9 @@ var arcgisWeatherHazard = {
 
   api: "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Climate_Outlooks/cpc_weather_hazards/MapServer",
   temperaturelayerid: 1,
-  temperaturelayerdesc:"",
+  temperaturelayerdesc: "<b>Outlook</b>: ${label}<br><b>End Date</b>: ${end_date}<br><b>Shape Area</b>: ${st_area(shape)}<br><b>Shape Length</b>: ${st_length(shape)}",
   precipitationlayerid: 4,
-  precipitationlayerdesc:"",
+  precipitationlayerdesc: "<b>Outlook</b>: ${label}<br><b>End Date</b>: ${end_date}<br><b>Shape Area</b>: ${st_area(shape)}<br><b>Shape Length</b>: ${st_length(shape)}",
   whereclause: null,
 
   isloaded: false,

@@ -215,7 +215,7 @@ h5.cat {
 
 div.top-space
 {
-    padding-top: 30px
+    padding-top: 20px
 }
 
 .form-catalog {
@@ -241,6 +241,15 @@ div.top-space
             width: 100%;
         }
 
+input.form-control.error
+{
+    border-color: #ff0000
+}
+label.error
+{
+    color: #ff0000
+}
+
 /*map*/
 .map {
     min-width: 100%;
@@ -249,6 +258,10 @@ div.top-space
     position: fixed !important;
 }
 
+.map_open {
+        display: none;
+    }
+    
 .btm-zindex {
     position: absolute;
     z-index: 1;
@@ -293,16 +306,41 @@ div.top-space
       background-image: none;
     }
 
-
-@media (min-width: 480px) {
-    .map_open {
-        display: none;
-    }
+span#service 
+{
+ font-weight: 600
 }
 
-@media (max-width: 480px) {
-    .map_open{
+span#service span
+{
+ padding-left:5px;
+ padding-right:5px;
+ /*border-radius: 5px;
+ background-color: #000;
+ color:#fff*/
+}
+/*Override Esri Style*/
+.esriPopupMobile
+{
+     font-family: "Source Sans Pro" !important;
+}
+.esriPopupMobile .titlePane
+{
+    background: #112e51 !important;
+}
+.esriPopupMobile .titlePane .footer
+{
+    font-style:normal !important;
+}
+.esriMobileNavigationBar
+{
+    background: #005e90 !important;
+    font-family: "Source Sans Pro" !important;
+}
 
+@media (max-width: 736px) {
+    .map_open{
+        display: block;
         padding-bottom:10px
     }
 
@@ -321,3 +359,7 @@ div.top-space
         max-width:100%;
     }
 }
+
+
+
+

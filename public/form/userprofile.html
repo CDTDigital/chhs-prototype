@@ -1,21 +1,22 @@
 <h5 class="cat">Welcome </h5>
+<h4>Manager your profile:</h4>
 <form class='uswds-form' method="post">
     <div class="form-group">
         <label for="firstname">First name:</label>
-        <input type="text" class="form-control" id="firstname" name="firstname">
+        <input type="text" class="form-control" id="firstname" name="firstname" required>
     </div>
     <div class="form-group">
         <label for="lastname">Last name:</label>
-        <input type="text" class="form-control" id="lastname" name="lastname">
+        <input type="text" class="form-control" id="lastname" name="lastname" required>
     </div>
     <div class="form-group">
         <label for="email">Email address:</label>
-        <input type="email" class="form-control" id="email" name="email">
+        <input type="email" class="form-control" id="email" name="email" required>
     </div>
 
     <div class="form-group">
         <label for="phonenumber">Phone number:</label>
-        <input type="tel" class="form-control" id="phonenumber" name="phonenumber">
+        <input type="tel" class="form-control" id="phonenumber" name="phonenumber" required>
     </div>
     <div class="checkbox">
         <label><input type="checkbox" id="receivetext" name="receivetext">Receive text</label>
@@ -23,6 +24,7 @@
     <div class="checkbox">
         <label><input type="checkbox" id="receiveemail" name="receiveemail">Receive email</label>
     </div>
+    <div id="results"></div>
     <button type="submit" class="btn btn-primary">Save profile</button>
 </form>
 <div class="top-space"></div>
@@ -39,7 +41,7 @@
 
         $.getJSON(url)
             .then(function (data) {
-                $('h5.cat').html('Welcome ' + data.Name + ',');
+                $('h5.cat').html('Welcome ' + data.Name);
                 $('#firstname').val(data.FirstName);
                 $('#lastname').val(data.LastName);
                 $('#email').val(data.Email);
@@ -50,7 +52,20 @@
                 console.error("User Profile Form; Error: " + d);
             });
 
-        $("form").submit(function () {
+        $("form").validate({
+            rules: {
+                phonenumber: {
+                    required: true,
+                    phoneUS: true
+                }
+            }
+        });
+
+        $("form").submit(function (e) {
+
+            e.preventDefault();
+
+            if (!$("form").valid()) return;
 
             var submitdata = { Name: null, FirstName: null, LastName: null, Email: null, Phone: null, ReceiveText: null, ReceiveEmail: null };
 
@@ -63,7 +78,7 @@
             submitdata.ReceiveEmail = $('#receiveemail').prop('checked');
 
             $.ajax({
-                url: url,
+                url: app.userprofileApi,
                 type: 'PUT',
                 contentType: 'application/json',
                 data: JSON.stringify(submitdata),
@@ -71,14 +86,17 @@
                 //     withCredentials: true
                 // },
                 success: function (data) {
-                    console.log(data);
+                    $('#results')
+                    .html('<div class="alert alert-success"><strong>Success!</strong>  User profile was successfully update!</div>')
+                    .fadeOut(5000);
                 },
                 error: function (error) {
-                    console.log('Update Error occurred - ' + error);
+                    $('#results')
+                    .html('<div class="alert alert-danger"><strong>Ooops!</strong> Error saving user profile!</div>')
+                    .fadeOut(5000);
                 }
             });
 
-            return false;
         });
 
     })
