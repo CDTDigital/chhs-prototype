@@ -1,11 +1,26 @@
-<h5 class="cat">Welcome</h5>
+<h5 class="cat">Plan and Prepare California</h5>
+<h4>What will you do if a disaster strikes today? Will you be ready?</h4>
 
 <p>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-    text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    “Preparedness is everyone's job. Not just government agencies but all sectors of society -- service providers, businesses, civic and volunteer groups, industry associations and neighborhood associations, as well as every individual citizen -- should plan ahead for disaster. During the first few hours or days following a disaster, essential services may not be available. People must be ready to act on their own.” ​
 </p>
 <br/>
+<a href="form/register.html" class="btn btn-danger auth">Sign up for notifications and alerts</a>
+<div class="top-space"></div>
 <ul class="form-catalog">
-    <li><a href="form/register.html">Create Account</a></li>
+    
+    <!--<li><a href="form/register.html">Create Account</a></li>-->
     <li><a href="form/signin.html" >Sign In</a></li>
 </ul>
+
+<script>
+$(function(){
+
+//Initialize/Clear Map
+arcgis.removeFeatureLayer();
+
+//Mimics Admin Logoff
+app.isAdmin = false;
+
+});
+</script>
