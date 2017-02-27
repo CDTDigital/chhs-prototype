@@ -12,76 +12,102 @@ var arcgis = {
   featureLayerid: 'arcgis-layer',
   markerId: 'arcgis-marker',
 
+  currentlat: null,
+  currentlong: null,
+
   initializeMap: function () {
 
     var map;
 
 
-    require(["esri/map", "esri/geometry/webMercatorUtils", "esri/dijit/Popup", "esri/dijit/PopupTemplate", "esri/toolbars/draw", "esri/graphic", "esri/symbols/SimpleFillSymbol", "dojo/dom-construct", "dojo/dom", "dojo/domReady!"], function (Map, webMercatorUtils, Popup, PopupTemplate, Draw, Graphic, SimpleFillSymbol, domConstruct, dom) {
+    require(["esri/map", "esri/geometry/webMercatorUtils",
+      "esri/geometry/Point",
+      "esri/geometry/Polygon",
+      "esri/SpatialReference",
+      "esri/dijit/Popup",
+      "esri/dijit/PopupTemplate",
+      "esri/toolbars/draw",
+      "esri/graphic",
+      "esri/symbols/SimpleFillSymbol",
+      "esri/tasks/GeometryService",
+      "dojo/dom-construct",
+      "dojo/dom",
+      "dojo/domReady!"], function (Map, webMercatorUtils,Point, Polygon,SpatialReference,Popup, PopupTemplate, Draw, Graphic, SimpleFillSymbol, GeometryService, domConstruct, dom) {
 
-      var toolbar;
-      var symbol;
-
-      var popupOptions = {
-        marginLeft: "20",
-        marginTop: "20"
-      };
-      //create a popup to replace the map's info window
-      var popup = new Popup(popupOptions, domConstruct.create("div"));
-
-      map = new Map("map_canvas", {
-        basemap: "streets",
-        center: [-124.405, 37.854],
-        zoom: 6,
-        infoWindow: popup
-      });
-
-      map.on("load", function () {
-        //after map loads, connect to listen to mouse move & drag events
-        createToolbar();
-        map.on("mouse-move", showCoordinates);
-        map.on("mouse-drag", showCoordinates);
-      });
-
-      $('body').on('click', 'a#lnkRadius', function (e) {
-        activateTool();
-      });
-
-      $('body').on('click', 'a#lnkClearRadius', function (e) {
-        arcgis.clearMapGraphics();
-      });
-
-      function activateTool() {
-        arcgis.clearMapGraphics();
-        toolbar.activate(Draw.CIRCLE);
-      }
-
-      function createToolbar(themap) {
-        toolbar = new Draw(map);
-        toolbar.on("draw-end", addToMap);
-      }
-
-      function addToMap(evt) {
+        var toolbar;
         var symbol;
-        toolbar.deactivate();
-        symbol = new SimpleFillSymbol();
 
-        var graphic = new Graphic(evt.geometry, symbol);
-        map.graphics.add(graphic);
-      }
+        var popupOptions = {
+          marginLeft: "20",
+          marginTop: "20"
+        };
+        //create a popup to replace the map's info window
+        var popup = new Popup(popupOptions, domConstruct.create("div"));
 
-      function showCoordinates(evt) {
-        //the map is in web mercator but display coordinates in geographic (lat, long)
-        var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);
-        //display mouse coordinates
-        dom.byId("latlong").innerHTML = mp.x.toFixed(3) + ", " + mp.y.toFixed(3);
-      }
+        map = new Map("map_canvas", {
+          basemap: "streets",
+          center: [-124.405, 37.854],
+          zoom: 6,
+          infoWindow: popup
+        });
 
-      arcgis.webmap = map;
+        map.on("load", function () {
+          //after map loads, connect to listen to mouse move & drag events
+          createToolbar();
+          map.on("mouse-move", showCoordinates);
+          map.on("mouse-drag", showCoordinates);
+        });
 
-      helper.getLocation();
+        $('body').on('click', 'a#lnkRadius', function (e) {
+          activateTool();
+        });
 
-    });
+        $('body').on('click', 'a#lnkClearRadius', function (e) {
+          arcgis.clearMapGraphics();
+        });
+
+        function activateTool() {
+          arcgis.clearMapGraphics();
+          toolbar.activate(Draw.CIRCLE);
+        }
+
+        function createToolbar(themap) {
+          toolbar = new Draw(map);
+          toolbar.on("draw-end", addToMap);
+        }
+
+        geometryService = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+
+        function addToMap(evt) {
+          var symbol;
+          toolbar.deactivate();
+          symbol = new SimpleFillSymbol();
+
+          var graphic = new Graphic(evt.geometry, symbol);
+          map.graphics.add(graphic);
+
+          geometryService.simplify([evt.geometry], isPointinPolygon);
+        }
+
+        function isPointinPolygon(geometries) {
+          
+          var point = new Point(arcgis.currentlong, arcgis.currentlat);
+          var retval = geometries[0].contains(point); 
+          console.log(retval);
+        }
+
+        function showCoordinates(evt) {
+          //the map is in web mercator but display coordinates in geographic (lat, long)
+          var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);
+          //display mouse coordinates
+          dom.byId("latlong").innerHTML = mp.x.toFixed(3) + ", " + mp.y.toFixed(3);
+        }
+
+        arcgis.webmap = map;
+
+        helper.getLocation();
+
+      });
 
 
   },
@@ -291,6 +317,9 @@ var arcgis = {
       var pt = webMercatorUtils.geographicToWebMercator(new Point(position.coords.longitude,
         position.coords.latitude));
 
+      arcgis.currentlat = position.coords.latitude;
+      arcgis.currentlong = position.coords.longitude;
+
       var attributes = {};
       attributes.id = arcgis.markerId;
 
@@ -308,27 +337,52 @@ var arcgis = {
 
     var long = obj[0].rel.split(',')[0];
     var lat = obj[0].rel.split(',')[1];
+    var title = obj[0].title
 
     require([
       "esri/graphic",
       "esri/geometry/Point",
       "esri/geometry/webMercatorUtils",
       "esri/symbols/PictureMarkerSymbol",
+      "esri/InfoTemplate",
+      "dojox/charting/Chart2D",
+      "dojox/charting/plot2d/Columns",
+      "dojox/charting/action2d/Highlight",
+      "dojox/charting/action2d/MoveSlice",
+      "dojox/charting/action2d/Tooltip",
+      "dojox/charting/themes/Wetland",
+      "dojo/dom-construct",
+      "dojo/dom-class",
       "dojo/domReady!"
-    ], function (Graphic, Point, webMercatorUtils, PictureMarkerSymbol) {
+    ], function (Graphic, Point, webMercatorUtils, PictureMarkerSymbol,
+      InfoTemplate, Chart2D, Columns, Highlight, MoveSlice, Tooltip, dojoxTheme, domConstruct, domClass) {
 
-      var map = arcgis.webmap;
+        var map = arcgis.webmap;
 
-      var infoSymbol = new PictureMarkerSymbol({"angle":0,"xoffset":0,"yoffset":10,"type":"esriPMS","url":"http://static.arcgis.com/images/Symbols/Shapes/RedPin2LargeB.png","imageData":"iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADImlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4MkVEMEZDNUQyN0MxMUUwQUU5NUVFMEYwMTY0NzUwNSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4MkVEMEZDNkQyN0MxMUUwQUU5NUVFMEYwMTY0NzUwNSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjgyRUQwRkMzRDI3QzExRTBBRTk1RUUwRjAxNjQ3NTA1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjgyRUQwRkM0RDI3QzExRTBBRTk1RUUwRjAxNjQ3NTA1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQg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","contentType":"image/png","width":24,"height":24});
-      
-      var pt = webMercatorUtils.geographicToWebMercator(new Point(long,lat));
+        var infoSymbol = new PictureMarkerSymbol({ "angle": 0, "xoffset": 0, "yoffset": 12, "type": "esriPMS", "url": "http://static.arcgis.com/images/Symbols/Transportation/RedTriangleDaymark.png", "imageData": "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", "contentType": "image/png", "width": 24, "height": 24 });
 
-      var marker = new Graphic(new Point(pt, map.spatialReference), null, null);
-      marker.setSymbol(infoSymbol);
+        var pt = webMercatorUtils.geographicToWebMercator(new Point(long, lat));
 
-      map.graphics.add(marker);
+        var marker = new Graphic(new Point(pt, map.spatialReference), null, null);
+        marker.setSymbol(infoSymbol);
 
-    });
+        var template = new InfoTemplate();
+        template.setTitle(title);
+        template.setContent(getWindowContent);
+
+        marker.setInfoTemplate(template);
+
+        function getWindowContent(graphic) {
+
+
+          var html = helper.mockChart();
+          return html;
+
+        }
+
+        map.graphics.add(marker);
+
+      });
 
   }
 

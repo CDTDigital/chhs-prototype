@@ -297,6 +297,144 @@ label.error
     transform: translate(-5%, -50%);
 }
 
+/*Chart*/
+
+.chart, .chart caption {
+  background: #FFF;
+}
+
+.chart {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 2em 0 5em 2em;
+  border-right: 2em solid white;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart caption {
+  width: 100%;
+  margin-bottom: 2rem;
+  height: 2rem;
+}
+
+.chart h1 {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.chart thead, .chart .scale, .chart .body {
+  height: calc(100% - 4rem);  
+}
+
+.chart thead {
+  display: flex;
+  align-items: center;
+}
+
+.chart thead tr {
+  width: 1em;
+}
+
+.chart .yLabel {
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left center;
+  font-weight: bold;
+}
+
+
+
+.chart .xLabel {
+  position: absolute;
+  width: 100%;
+  bottom: 1em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.chart .scale {
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart .scale tr {
+  flex-grow: 1;
+}
+
+.chart .scale td {
+  text-align: center;
+  display: block;
+  margin-right: 0.5em;
+  line-height: 0em;
+}
+
+.chart .scale td::after {
+  content: "";
+  height: 1px;
+  width: 100%;
+  background: black;
+  position: absolute;
+}
+
+.chart .body {
+  display: flex;
+  flex-grow: 1;
+  background: #ebeef0;
+}
+
+.chart .body tr {
+  display: flex;
+  align-items: flex-end;
+  flex-grow: 1;
+  flex-basis: 0;
+  margin: 0 2% 0 0;
+  position: relative;
+}
+
+.chart .body tr:first-child {
+  margin-left: 2%;
+}
+
+.record {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: -2em;
+  font-size: 0.8em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sales {
+  background: #f36e65;
+  display: block;
+  width: 100%;
+}
+
+.chart .sales span {
+  display: block;
+  background: #FFF;
+  color: #f36e65;
+  padding: 0.5em;
+  text-align: center;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  margin: 10%;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart .sales:hover span {
+  opacity: 1;
+}
+
 /*Misc*/
 
 .claro .dijitTooltipContainer {
