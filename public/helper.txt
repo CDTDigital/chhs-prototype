@@ -172,3 +172,5 @@ var arcgisGEMS = {
                 show collections
                 db.getName()
 
+
+--Lite server creates geo location issue.

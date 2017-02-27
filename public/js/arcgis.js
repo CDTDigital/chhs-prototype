@@ -32,7 +32,7 @@ var arcgis = {
       "esri/tasks/GeometryService",
       "dojo/dom-construct",
       "dojo/dom",
-      "dojo/domReady!"], function (Map, webMercatorUtils,Point, Polygon,SpatialReference,Popup, PopupTemplate, Draw, Graphic, SimpleFillSymbol, GeometryService, domConstruct, dom) {
+      "dojo/domReady!"], function (Map, webMercatorUtils, Point, Polygon, SpatialReference, Popup, PopupTemplate, Draw, Graphic, SimpleFillSymbol, GeometryService, domConstruct, dom) {
 
         var toolbar;
         var symbol;
@@ -62,7 +62,7 @@ var arcgis = {
           activateTool();
         });
 
-        $('body').on('click', 'a#lnkClearRadius', function (e) {
+        $('body').on('click', 'a#lnkClearRadius,a#lnkClearMap', function (e) {
           arcgis.clearMapGraphics();
         });
 
@@ -83,16 +83,19 @@ var arcgis = {
           toolbar.deactivate();
           symbol = new SimpleFillSymbol();
 
-          var graphic = new Graphic(evt.geometry, symbol);
+          var attributes = {};
+          attributes.isRadius = true;
+
+          var graphic = new Graphic(evt.geometry, symbol,attributes);
           map.graphics.add(graphic);
 
           geometryService.simplify([evt.geometry], isPointinPolygon);
         }
 
         function isPointinPolygon(geometries) {
-          
+
           var point = new Point(arcgis.currentlong, arcgis.currentlat);
-          var retval = geometries[0].contains(point); 
+          var retval = geometries[0].contains(point);
           console.log(retval);
         }
 
@@ -284,16 +287,23 @@ var arcgis = {
 
     var map = arcgis.webmap;
 
+    if (map.infoWindow)
+      map.infoWindow.hide();
+
     for (i = 0; i < map.graphics.graphics.length; i++) {
 
-      var graphic = map.graphics.graphics[i];
+      var _graphic = map.graphics.graphics[i];
 
-      if (graphic.attributes != undefined) {
-        if (graphic.attributes.id != arcgis.markerId)
-          map.graphics.remove(graphic);
+      if (_graphic.attributes != undefined) {
+        if (_graphic.attributes.isAnalyticalPopup == true || _graphic.attributes.isRadius == true)
+          map.graphics.remove(_graphic);
       }
-      else
-        map.graphics.remove(graphic);
+      // if (_graphic.attributes != undefined) {
+      //   if (_graphic.attributes.id != arcgis.markerId)
+      //     map.graphics.remove(_graphic);
+      // }
+      // else
+      //   map.graphics.remove(_graphic);
     }
 
     //arcgis.webmap.graphics.clear();
@@ -363,7 +373,10 @@ var arcgis = {
 
         var pt = webMercatorUtils.geographicToWebMercator(new Point(long, lat));
 
-        var marker = new Graphic(new Point(pt, map.spatialReference), null, null);
+        var attributes = {};
+        attributes.isAnalyticalPopup = true;
+
+        var marker = new Graphic(new Point(pt, map.spatialReference), null, attributes);
         marker.setSymbol(infoSymbol);
 
         var template = new InfoTemplate();
