@@ -31,6 +31,14 @@ var ifishDAL = function () {
             callback(result)
         })
     }
+
+    this.insertAlertHistory = function(newData, db, callback) {
+        var collection = db.collection('alerts')
+        collection.insert(newData, function(err, result) {
+            assert.equal(err, null)
+            callback(result)
+        })
+    }
 }
 
 ifishDAL.prototype.GetUserProfile = function (callback) {
@@ -50,6 +58,17 @@ ifishDAL.prototype.GetAlertHistory = function (callback) {
     MongoClient.connect(_this.url, function(err, db) {
         assert.equal(null, err)
         _this.getAlerts(db, function(docs) { 
+            db.close()
+            callback(docs)
+        })
+    })
+}
+
+ifishDAL.prototype.InsertAlertHistory = function (newData, callback) {
+    var _this = this
+    MongoClient.connect(_this.url, function (err, db) {
+        assert.equal(null, err)
+        _this.insertAlertHistory(newData, db, function(docs) { //insert new data
             db.close()
             callback(docs)
         })
