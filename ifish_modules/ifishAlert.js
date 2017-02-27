@@ -24,7 +24,7 @@ var ifishAlert = function () {
     if (message.sendEmail) {
       dal.GetUserProfile(function (user) {
         console.log('will call sendHtml with ' + user.Email + ' and ' + message.message)
-        //ifishEmail.sendHtml(user.Email, "ADPQ Test", message.Message)          
+        ifishEmail.sendHtml(user.Email, "ADPQ Test", message.message)          
       })
     }
 
@@ -33,7 +33,8 @@ var ifishAlert = function () {
         dal.GetUserProfile(function (user) {
           console.log('will call send with ' + user.Phone + ' and ' + message.message)
           console.dir(twilioConfig)
-          //twilioSMS.send(user.Phone, message.Message, twilioConfig)          
+          sms = new twilioSMS()
+          sms.send(user.Phone, message.message, twilioConfig)          
         })
       }
     }
