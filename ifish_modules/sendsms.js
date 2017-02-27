@@ -1,15 +1,25 @@
-var twilioClient = require('twilioClient')
+//Since emails are not going out from an smtp server,
+//the provider's email filter eats up the message
+//and the text never arrives
 
-function formatMessage(errorToReport) {
-  return '[This is a test] ALERT! It appears the server is' +
-    'having issues. Exception: ' + errorToReport +
-    '. Go to: http://newrelic.com ' +
-    'for more details.'
-}
+var ifishEmail = require('./ifishEmail')
 
-var ifishSMS = function(phoneNumber, textMessage) {
-  var messageToSend = formatMessage(textMessage)
-  twilioClient.sendSms(phoneNumber, messageToSend)
+ /*
+ Provider domains:
+ AT&T @txt.att.net
+ Verizon @vtext.com
+ T-Mobile @tmomail
+ Sprint @messaging.sprintpcs.com
+ Virgin @vmobl.com
+ */
+
+var ifishSMS = function () {
+  this.send = function(phone, providerDomain, textMessage) {    
+    var smsAddress = phone + providerDomain
+    console.log('sending sms to ' + smsAddress)
+    ifishEmail.sendPlainText(smsAddress, "Test SMS", textMessage)
+  }  
 }
 
 module.exports = ifishSMS
+

@@ -13,6 +13,16 @@ var ifishDAL = function () {
         })
     }
 
+    //gets alert history
+    this.getAlerts = function(db, callback) {
+        var collection = db.collection('alerts')
+        collection.find({}, {_id: false}).toArray(function(err, docs) {
+            assert.equal(err, null)
+            console.dir(docs)
+            callback(docs)
+        })
+    }
+
     //updates a user
     this.setUser = function(user, newData, db, callback) {        
         var collection = db.collection('users')        
@@ -29,6 +39,17 @@ ifishDAL.prototype.GetUserProfile = function (callback) {
     MongoClient.connect(_this.url, function(err, db) {
         assert.equal(null, err)            
         _this.getUser(db, function(docs) {
+            db.close()
+            callback(docs)
+        })
+    })
+}
+
+ifishDAL.prototype.GetAlertHistory = function (callback) {
+    var _this = this
+    MongoClient.connect(_this.url, function(err, db) {
+        assert.equal(null, err)
+        _this.getAlerts(db, function(docs) { 
             db.close()
             callback(docs)
         })
