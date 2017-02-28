@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "lite-server",
+    "start": "node app.js",
     "webapi": "node webapi/webapi.js",
     "test": "node test.js"
   },
