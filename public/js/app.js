@@ -4,6 +4,10 @@ var app = {
     isAdmin: false,
 
     userprofileApi: "http://laptop-3ol73aqk:8081/userprofile",
+    notificationApi: "http://laptop-3ol73aqk:8081/notifications",
+    sendalertApi: "http://laptop-3ol73aqk:8081/sendalert",
+
+    alertDataSet: null,
 
     bindMenu: function () {
 
@@ -209,16 +213,32 @@ var helper = {
     },
 
 
-    mockChart: function () {
+    mockChart: function (sms, email) {
 
         var chart = "<table class='chart'><caption>Breakdown by notification type</caption>";
         chart += "<thead><tr><th class='xLabel'>Type</th><th class='yLabel'>Sent</th></tr></thead>";
         chart += "<tbody class='scale' aria-hidden='true'><tr><td colspan='2'>100</td></tr><tr><td colspan='2'>75</td></tr>";
         chart += "<tr><td colspan='2'>50</td></tr><tr><td colspan='2'>25</td></tr></tbody>";
-        chart += "<tbody class='body'><tr><td class='record'' title='SMS'>SMS</td><td class='sales' style='height: 66%' title='66'><span>66</span></td></tr>";
-        chart += "<tr><td class='record' title='Email'>Email</td><td class='sales' style='height: 34%' title='34'><span>34</span></td></tr></tbody></table>";
+        chart += "<tbody class='body'><tr><td class='record'' title='SMS'>SMS</td><td class='sales' style='height: " + sms + "%' title='" + sms + "'><span>" + sms + "</span></td></tr>";
+        chart += "<tr><td class='record' title='Email'>Email</td><td class='sales' style='height: " + email + "%' title='" + email + "'><span>" + email + "</span></td></tr></tbody></table>";
 
         return chart;
+    },
+
+    enableAlertForm: function (enable) {
+
+        if (enable) {
+            $("#frmAlert *").prop("disabled", false);
+            $("#frmAlert #title").focus();
+        }
+        else 
+        {
+            $("#frmAlert *").prop("disabled", true);
+            $("#frmAlert #title").val('');
+            $("#frmAlert #message").val('');
+            $("#frmAlert input[name='optradio'][value='Non-Emergency']").prop("checked",true);
+        }
+
     }
 
 };

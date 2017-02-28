@@ -1,23 +1,24 @@
 <h5 class="cat">Admin Create Alert</h5>
-<form class='uswds-form' method="post">
-    <div class="form-group">
-        <label for="title">Alert Radius:</label>
-        <a href='#' id="lnkRadius">Select Radius</a>&nbsp;|&nbsp;<a href='#' id="lnkClearRadius">Clear Radius</a>
-    </div>
+<div class="form-group">
+    <label for="title">Alert Radius:</label>
+    <a href='#' id="lnkRadius">Select Radius</a>&nbsp;|&nbsp;<a href='#' id="lnkClearRadius">Clear Radius</a>
+</div>
+<form class='uswds-form' method="post" id="frmAlert">
+
     <div class="form-group">
         <label for="title">Alert Title:</label>
         <input type="text" class="form-control" id="title" name="title" required>
     </div>
     <div class="form-group">
         <label for="comment">Alert Description:</label>
-        <textarea class="form-control" rows="5" id="comment" required></textarea>
+        <textarea class="form-control" rows="5" id="message" name="message" required></textarea>
     </div>
     <div class="form-group">
         <div class="radio">
-            <label><input type="radio" name="optradio" value="emergency">Emergency</label>
+            <label><input type="radio" name="optradio" value="Emergency">Emergency (Email + SMS)</label>
         </div>
         <div class="radio">
-            <label><input type="radio" name="optradio" value="non-emergency" checked>Non-Emergency</label>
+            <label><input type="radio" name="optradio" value="Non-Emergency" checked>Non-Emergency (Email Only)</label>
         </div>
     </div>
     <div id="results"></div>
@@ -34,6 +35,7 @@
 <script>
     $(function () {
 
+        $("#frmAlert *").prop("disabled", true);
 
         $("form").validate();
 
@@ -41,7 +43,49 @@
 
             e.preventDefault();
 
-          });  
+            if (!$("form").valid()) return;
+            
+            var submitdata = { title: null, message: null, type: null, lat: null, long: null, sendSMS: null, sendEmail: null };
+
+            submitdata.title = $('#title').val();
+            submitdata.message = $('#message').val();
+            submitdata.type = $("input[name='optradio']:checked").val();
+            submitdata.lat = arcgis.alertRadiusData.centerLatitude;
+            submitdata.long = arcgis.alertRadiusData.centerLongitude;
+            submitdata.sendSMS = $("input[name='optradio']:checked").val() == 'Emergency' ? 1 : 0;
+            submitdata.sendEmail = 1;
+
+            if (!arcgis.alertRadiusData.isPointInRadius)
+                $('#results')
+                    .show()
+                    .html('<div class="alert alert-danger"><strong>Alert</strong> wasn\'t sent due to point being outside search radius!</div>')
+                    .fadeOut(8000);
+            else {
+                $.ajax({
+                    url: app.sendalertApi,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(submitdata),
+                    // xhrFields: {
+                    //     withCredentials: true
+                    // },
+                    success: function (data) {
+                        $('#results')
+                            .show()
+                            .html('<div class="alert alert-success"><strong>Success!</strong>  Alert was successfully sent!</div>')
+                            .fadeOut(8000);
+                    },
+                    error: function (error) {
+                        $('#results')
+                            .show()
+                            .html('<div class="alert alert-danger"><strong>Ooops!</strong> Error sending alert!</div>')
+                            .fadeOut(8000);
+                    }
+                });
+
+            }
+
+        });
 
     })
 

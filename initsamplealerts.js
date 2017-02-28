@@ -13,7 +13,7 @@ var alerts = [{
               'Lat': '39.5387752',
               'Long': '-121.4855237',
               'SMSCount': 46,
-              'EmaiCount': 54
+              'EmailCount': 54
             },
             {
               'Date': '2/17/2017',

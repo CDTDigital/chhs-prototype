@@ -6,11 +6,11 @@ var url = 'mongodb://localhost:27017/test'
 
 var defaultUser =
   {
-    "Name": "Joe Smith",
-    "FirstName": "Joe",
-    "LastName": "Smith",
-    "Email": "jsmith@ifishgroup.com",
-    "Phone": "9165551213",
+    "Name": "Ernie Lopez",
+    "FirstName": "Ernie",
+    "LastName": "Lopez",
+    "Email": "elopez@ifishgroup.com",
+    "Phone": "9169195463",
     "ReceiveText": false,
     "ReceiveEmail": false
   }
@@ -30,7 +30,7 @@ var insertDocuments = function (db, callback) {
 //change the phone number
 var updateDocument = function (db, callback) {
   var collection = db.collection('users');
-  collection.updateOne(defaultUser, { $set: { "Phone": "9165551212" } }, function (err, result) {
+  collection.updateOne(defaultUser, { $set: { "Phone": "9169195463" } }, function (err, result) {
     assert.equal(err, null);
     assert.equal(1, result.result.n);
     console.log("Updated default user");

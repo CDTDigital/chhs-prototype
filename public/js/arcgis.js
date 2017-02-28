@@ -15,9 +15,12 @@ var arcgis = {
   currentlat: null,
   currentlong: null,
 
+  alertRadiusData : {},
+
   initializeMap: function () {
 
     var map;
+
 
 
     require(["esri/map", "esri/geometry/webMercatorUtils",
@@ -59,11 +62,15 @@ var arcgis = {
         });
 
         $('body').on('click', 'a#lnkRadius', function (e) {
+          helper.enableAlertForm(false);
           activateTool();
         });
 
         $('body').on('click', 'a#lnkClearRadius,a#lnkClearMap', function (e) {
+
+          helper.enableAlertForm(false);
           arcgis.clearMapGraphics();
+
         });
 
         function activateTool() {
@@ -86,17 +93,26 @@ var arcgis = {
           var attributes = {};
           attributes.isRadius = true;
 
-          var graphic = new Graphic(evt.geometry, symbol,attributes);
+          var graphic = new Graphic(evt.geometry, symbol, attributes);
           map.graphics.add(graphic);
 
-          geometryService.simplify([evt.geometry], isPointinPolygon);
+          geometryService.simplify([evt.geometry], calculatePolygon);
         }
 
-        function isPointinPolygon(geometries) {
+        function calculatePolygon(geometries) {
 
           var point = new Point(arcgis.currentlong, arcgis.currentlat);
           var retval = geometries[0].contains(point);
-          console.log(retval);
+
+          arcgis.alertRadiusData.isPointInRadius = retval;
+
+          var myPolygonCenterLatLon = geometries[0].getCentroid();
+          arcgis.alertRadiusData.centerLatitude = myPolygonCenterLatLon.getLatitude();
+          arcgis.alertRadiusData.centerLongitude = myPolygonCenterLatLon.getLongitude();
+
+          helper.enableAlertForm(true);
+         
+
         }
 
         function showCoordinates(evt) {
@@ -345,9 +361,17 @@ var arcgis = {
 
     arcgis.clearMapGraphics();
 
-    var long = obj[0].rel.split(',')[0];
-    var lat = obj[0].rel.split(',')[1];
     var title = obj[0].title
+
+    var sql = alasql('SELECT * FROM ? WHERE Title = "' + title + '"', [app.alertDataSet]);
+
+    var date = sql[0].Date;
+    var message = sql[0].Message;
+    var type = sql[0].Type;
+    var lat = sql[0].Lat;
+    var long = sql[0].Long;
+    var sms_count = sql[0].SMSCount;
+    var email_count = sql[0].EmailCount;
 
     require([
       "esri/graphic",
@@ -361,11 +385,13 @@ var arcgis = {
       "dojox/charting/action2d/MoveSlice",
       "dojox/charting/action2d/Tooltip",
       "dojox/charting/themes/Wetland",
+      "dijit/layout/ContentPane",
+      "dijit/layout/TabContainer",
       "dojo/dom-construct",
       "dojo/dom-class",
       "dojo/domReady!"
     ], function (Graphic, Point, webMercatorUtils, PictureMarkerSymbol,
-      InfoTemplate, Chart2D, Columns, Highlight, MoveSlice, Tooltip, dojoxTheme, domConstruct, domClass) {
+      InfoTemplate, Chart2D, Columns, Highlight, MoveSlice, Tooltip, dojoxTheme, ContentPane, TabContainer, domConstruct, domClass) {
 
         var map = arcgis.webmap;
 
@@ -388,7 +414,10 @@ var arcgis = {
         function getWindowContent(graphic) {
 
 
-          var html = helper.mockChart();
+          var html = "<b>Date</b>: " + date + "<br><b>Type</b>: " + type  + "<br><br><p>" + message + "</p><br>" 
+
+          
+          html += helper.mockChart(sms_count,email_count);
           return html;
 
         }

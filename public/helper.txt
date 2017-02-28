@@ -174,3 +174,5 @@ var arcgisGEMS = {
 
 
 --Lite server creates geo location issue.
+
+npm run env NODE_ENV=production

@@ -1,7 +1,7 @@
 <h5 class="cat">Admin Control Panel</h5>
 <h4>Analyze and Visualize</h4>
 <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover ">
+    <table class="table table-bordered table-striped table-hover " id='tbl-alerts'>
         <thead>
             <tr>
                 <th>Date</th>
@@ -12,26 +12,8 @@
         </thead>
         <tbody>
             <tr>
-                <td>2/13/2017</td>
-                <td>Oroville Evacuation</td>
-                <td>Emergency</td>
-                <td><a href="#" rel="-121.4855237,39.5387752" title="Oroville Evacuation" class="analytics view">View</a></td>
-            </tr>
-            <tr>
-                <td>2/17/2017</td>
-                <td>Hwy 50 Mud slide</td>
-                <td>Non Emergency</td>
-                <td><a href="#" rel="-120.2968596,38.7746298" title="Hwy 50 Mud slide" class="analytics view">View</a></td>
-            </tr>
-            <tr>
-                <td>2/21/2017</td>
-                <td>Manteca Levee</td>
-                <td>Emergency</td>
-                <td><a href="#" title="Manteca Levee" rel="-121.1979953,37.7290953" class="analytics view">View</a></td>
-            </tr>
-            <tr>
-                
-                <td colspan=4 ><a href='#' id="lnkClearMap" class="pull-right">Clear Map</a></td>
+
+                <td colspan=4><a href='#' id="lnkClearMap" class="pull-right">Clear Map</a></td>
             </tr>
         </tbody>
     </table>
@@ -48,15 +30,30 @@
         //Mimics Admin Login
         app.isAdmin = true;
 
-        $('a.analytics.view').on('click', function (e) {
 
+        //TODO: Use template engine jsrender/jsviews
+        var url = app.notificationApi;
+
+        $.getJSON(url)
+            .then(function (response) {
+
+                app.alertDataSet = response;
+                
+                var trHTML = '';
+                $.each(response, function (i, item) {
+                    trHTML += '<tr><td>' + item.Date + '</td><td>' + item.Title + '</td><td>' + item.Type + '</td><td><a href="#" title="' + item.Title + '" class="analytics view">View</a></td></tr>';
+                });
+                $('#tbl-alerts tbody').prepend(trHTML);
+
+            }).fail(function (d) {
+                console.error("Notification Form; Error: " + d);
+            });
+
+        $('body').on('click', 'a.analytics.view', function (e) {
             e.preventDefault();
             arcgis.showAnalyticalPopup($(this));
         });
 
-
     });
-
- 
 
 </script>
