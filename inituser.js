@@ -6,7 +6,6 @@ var url = 'mongodb://localhost:27017/test'
 
 var defaultUser =
   {
-    "Name": "Ernie Lopez",
     "FirstName": "Ernie",
     "LastName": "Lopez",
     "Email": "elopez@ifishgroup.com",

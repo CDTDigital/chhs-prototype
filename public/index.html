@@ -25,21 +25,21 @@
 
             <ul>
                 <li>
-                    <a href="tabWelcome" class="active"><i class="icon-home"></i></a>
+                    <a href="tabWelcome" class="active" title="Home tab"><i class="icon-home" alt="Home tab"></i></a>
                 </li>
                 <li>
-                    <a href="tabWeather"><i class="icon-rain"></i></a>
+                    <a href="tabWeather" title="Weather Hazards (NOAA) web api"><i class="icon-rain" alt="Weather Hazards (NOAA) web api"></i></a>
                 </li>
                 <li>
-                    <a href="tabEarthquakes"><i class="icon-zodiac-aquarius"></i></a>
-                </li>
-
-                <li>
-                    <a href="tabRiverGauge"><i class="icon-bandwidth"></i></a>
+                    <a href="tabEarthquakes" title="Earthquakes (USGS) web api"><i class="icon-zodiac-aquarius" ></i></a>
                 </li>
 
                 <li>
-                    <a href="tabActiveFire"><i class="icon-fire"></i></a>
+                    <a href="tabRiverGauge" title="River Gauge - Current and Forecast (NOAA) web api"><i class="icon-bandwidth" ></i></a>
+                </li>
+
+                <li>
+                    <a href="tabActiveFire" title="Active Fire Boundaries (USGS GeoMAC) web api"><i class="icon-fire"></i></a>
                 </li>
 
 
@@ -53,7 +53,7 @@
                     <div class="logo">
                         <a href=".">
 
-                            <img src="img/bear_geo_logo2.png" />
+                            <img src="img/bear_geo_logo2.png" alt="ADPQ Prototype - The iFish Group" />
                         </a>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
     <script>
         $(function () {
 
-            arcgis.initializeMap();
+            //arcgis.initializeMap();
             app.loadForm('form/welcome.html');
             app.bindMenu();
             app.bindCatalog();

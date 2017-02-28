@@ -41,7 +41,7 @@
 
         $.getJSON(url)
             .then(function (data) {
-                $('#tabWelcome h5.cat').html('Welcome ' + data.Name);
+                $('#tabWelcome h5.cat').html('Welcome ' + data.FirstName + ' ' + data.LastName);
                 $('#firstname').val(data.FirstName);
                 $('#lastname').val(data.LastName);
                 $('#email').val(data.Email);
@@ -67,9 +67,8 @@
 
             if (!$("form").valid()) return;
 
-            var submitdata = { Name: null, FirstName: null, LastName: null, Email: null, Phone: null, ReceiveText: null, ReceiveEmail: null };
+            var submitdata = {FirstName: null, LastName: null, Email: null, Phone: null, ReceiveText: null, ReceiveEmail: null };
 
-            submitdata.Name = $('#firstname').val() + ' ' + $('#lastname').val();
             submitdata.FirstName = $('#firstname').val();
             submitdata.LastName = $('#lastname').val();
             submitdata.Phone = $('#phonenumber').val();
