@@ -10,10 +10,7 @@ var defaultUser =
     "LastName": "Doe",
     "Email": "jdoe@example.com",
     "Phone": "9165551212",
-<<<<<<< HEAD
     "ZipCode":"95833",
-=======
->>>>>>> a81208a28fe986c797beaa27885ce7e1c5770172
     "ReceiveText": false,
     "ReceiveEmail": false
   }
