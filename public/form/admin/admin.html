@@ -27,9 +27,12 @@
 <script>
     $(function () {
 
+        
         //Mimics Admin Login
         app.isAdmin = true;
 
+        //refresh screen if
+        arcgis.clearMapGraphics();
 
         //TODO: Use template engine jsrender/jsviews
         var url = app.notificationApi;

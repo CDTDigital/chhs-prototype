@@ -3,9 +3,9 @@ var app = {
 
     isAdmin: false,
 
-    userprofileApi: "http://adpq.ifgcloud.com/userprofile",
-    notificationApi: "http://adpq.ifgcloud.com/notifications",
-    sendalertApi: "http://adpq.ifgcloud.com/sendalert",
+    userprofileApi: "http://localhost:8080/userprofile",
+    notificationApi: "http://localhost:8080/notifications",
+    sendalertApi: "http://localhost:8080/sendalert",
 
     alertDataSet: null,
 
@@ -215,6 +215,9 @@ var helper = {
 
     mockChart: function (sms, email) {
 
+        sms = getRandomInt(20,100);
+        email = getRandomInt(20,100);
+
         var chart = "<table class='chart'><caption>Breakdown by notification type</caption>";
         chart += "<thead><tr><th class='xLabel'>Type</th><th class='yLabel'>Sent</th></tr></thead>";
         chart += "<tbody class='scale' aria-hidden='true'><tr><td colspan='2'>100</td></tr><tr><td colspan='2'>75</td></tr>";
@@ -260,6 +263,10 @@ function addCatalogLink(catalog, href, layerid, where, link, description, count)
     var html = '<li><a href="{0}" id="{1}" rel="{2}" hreflang="{3}">{4}<span>{5}</span></a></li>'.format(href, layerid, where, description, link, count);
 
     $(dom).append(html);
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 

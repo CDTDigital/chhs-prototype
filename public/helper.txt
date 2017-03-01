@@ -172,7 +172,19 @@ var arcgisGEMS = {
                 show collections
                 db.getName()
 
+for (i = 0; i < map.graphics.graphics.length; i++) {
 
+      var _graphic = map.graphics.graphics[i];
+
+      if (_graphic.attributes != undefined) {
+        if (_graphic.attributes.isAnalyticalPopup == true || _graphic.attributes.isRadius == true)
+          map.graphics.remove(_graphic);
+      }
+
+    }
+    
 --Lite server creates geo location issue.
 
 npm run env NODE_ENV=production
+npm run env NODE_ENV_PORT_NUM=8080
+npm run env | more

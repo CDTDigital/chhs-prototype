@@ -9,13 +9,14 @@ AMD specification not valid for old browsers (i.e. IE)
 var arcgis = {
 
   webmap: null,
+  userMarker: null,
   featureLayerid: 'arcgis-layer',
   markerId: 'arcgis-marker',
 
   currentlat: null,
   currentlong: null,
 
-  alertRadiusData : {},
+  alertRadiusData: {},
 
   initializeMap: function () {
 
@@ -111,7 +112,7 @@ var arcgis = {
           arcgis.alertRadiusData.centerLongitude = myPolygonCenterLatLon.getLongitude();
 
           helper.enableAlertForm(true);
-         
+
 
         }
 
@@ -179,7 +180,7 @@ var arcgis = {
 
           /* Need to show alert button when in admin mode and in mobile mode */
           connect.connect(popup, "onSelectionChange", function () {
-            $('a.label.label-default.none').removeClass('none');
+            //$('a.label.label-default.none').removeClass('none');
           });
 
         }
@@ -192,15 +193,15 @@ var arcgis = {
 
         map.setInfoWindow(popup);
 
-        map.infoWindow.on("show", function (e) {
-          if (app.isAdmin)
-            $('a.label.label-default.none').removeClass('none');
-        });
+        // map.infoWindow.on("show", function (e) {
+        //   if (app.isAdmin)
+        //     $('a.label.label-default.none').removeClass('none');
+        // });
 
-        map.infoWindow.on("selectionchange", function (e) {
-          if (app.isAdmin)
-            $('a.label.label-default.none').removeClass('none');
-        });
+        // map.infoWindow.on("selectionchange", function (e) {
+        //   if (app.isAdmin)
+        //     $('a.label.label-default.none').removeClass('none');
+        // });
 
         var template = new PopupTemplate();
         template.setTitle("The iFish Group Notification");
@@ -306,23 +307,14 @@ var arcgis = {
     if (map.infoWindow)
       map.infoWindow.hide();
 
-    for (i = 0; i < map.graphics.graphics.length; i++) {
+    arcgis.webmap.graphics.clear();
 
-      var _graphic = map.graphics.graphics[i];
-
-      if (_graphic.attributes != undefined) {
-        if (_graphic.attributes.isAnalyticalPopup == true || _graphic.attributes.isRadius == true)
-          map.graphics.remove(_graphic);
-      }
-      // if (_graphic.attributes != undefined) {
-      //   if (_graphic.attributes.id != arcgis.markerId)
-      //     map.graphics.remove(_graphic);
-      // }
-      // else
-      //   map.graphics.remove(_graphic);
+    //add user map marker
+    if (arcgis.userMarker != null) {
+      map.graphics.add(arcgis.userMarker);
+      map.centerAt(arcgis.userMarker.geometry.center);
+      map.setZoom(6);
     }
-
-    //arcgis.webmap.graphics.clear();
 
   },
 
@@ -352,6 +344,7 @@ var arcgis = {
       var marker1 = new Graphic(new Point(pt, map.spatialReference), null, attributes);
       marker1.setSymbol(infoSymbol);
 
+      arcgis.userMarker = marker1;
       map.graphics.add(marker1);
 
     });
@@ -414,10 +407,10 @@ var arcgis = {
         function getWindowContent(graphic) {
 
 
-          var html = "<b>Date</b>: " + date + "<br><b>Type</b>: " + type  + "<br><br><p>" + message + "</p><br>" 
+          var html = "<b>Date</b>: " + date + "<br><b>Type</b>: " + type + "<br><br><p>" + message + "</p><br>"
 
-          
-          html += helper.mockChart(sms_count,email_count);
+
+          html += helper.mockChart(sms_count, email_count);
           return html;
 
         }
@@ -426,7 +419,90 @@ var arcgis = {
 
       });
 
+  },
+
+  drawRadius: function (zip, miles) {
+
+    var locator, map;
+
+    require([
+      "esri/map", "esri/tasks/locator",
+      "esri/SpatialReference", "esri/graphic",
+      "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleMarkerSymbol",
+      "esri/geometry/Circle", "esri/symbols/TextSymbol",
+      "esri/geometry/Point", "esri/geometry/Extent",
+      "esri/geometry/webMercatorUtils",
+      "dojo/_base/array", "esri/Color",
+      "dojo/number", "dojo/parser", "dojo/dom", "dojo/json", "dijit/registry",
+      "dijit/form/Button", "dijit/form/Textarea",
+      "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/domReady!"
+    ], function (
+      Map, Locator,
+      SpatialReference, Graphic,
+      SimpleFillSymbol, SimpleMarkerSymbol,
+      Circle, TextSymbol,
+      Point, Extent,
+      webMercatorUtils,
+      arrayUtils, Color,
+      number, parser, dom, JSON, registry
+    ) {
+
+        arcgis.clearMapGraphics();
+
+        var map = arcgis.webmap;
+
+        locator = new Locator("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+
+        var address = {
+          SingleLine: zip
+        };
+        var options = {
+          address: address,
+          outFields: ["*"]
+        };
+        //optionally return the out fields if you need to calculate the extent of the geocoded point
+        locator.addressToLocations(options);
+
+        locator.on("address-to-locations-complete", function (evt) {
+
+          if(evt.addresses.length == 0)
+          {
+               $('#results').show().html('<div class="alert alert-danger"><strong>Error</strong>: Invalid zipcode!</div>').fadeOut(8000);
+              return;
+          }
+
+          var point = new Point(evt.addresses["0"].location.x, evt.addresses["0"].location.y)
+          arcgis.alertRadiusData.centerLatitude = evt.addresses["0"].location.y;
+          arcgis.alertRadiusData.centerLongitude = evt.addresses["0"].location.x;
+
+
+
+          var symbol = new SimpleFillSymbol();//.setColor("black").outline.setColor("red"); 
+          var circle = new Circle({
+            center: point,
+            geodesic: true,
+            radius: miles,
+            radiusUnit: "esriMiles"
+          });
+
+          var graphic = new Graphic(circle, symbol);
+          map.graphics.add(graphic);
+          map.centerAt(graphic.geometry.center);
+          //map.setZoom(7);
+
+          //is user marker within circle radius
+          var usermarker = new Point(arcgis.currentlong, arcgis.currentlat)
+          var retval = graphic.geometry.contains(usermarker);
+          arcgis.alertRadiusData.isPointInRadius = retval;
+
+        })
+
+
+
+      });
   }
+
+
 
 };
 
