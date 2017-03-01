@@ -1,13 +1,17 @@
 {
   "name": "adpq_prototype",
   "version": "1.0.0",
-  "description": "",
+  "description": "The iFish Group's ADPQ",
   "scripts": {
     "start": "node app.js",
     "webapi": "node webapi/webapi.js",
     "test": "node test.js"
   },
   "author": "The iFish Group Inc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theifishgroup/chhs-prototype"
+  },
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.2.2"

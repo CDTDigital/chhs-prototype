@@ -10,7 +10,10 @@ var defaultUser =
     "LastName": "Doe",
     "Email": "jdoe@example.com",
     "Phone": "9165551212",
+<<<<<<< HEAD
     "ZipCode":"95833",
+=======
+>>>>>>> a81208a28fe986c797beaa27885ce7e1c5770172
     "ReceiveText": false,
     "ReceiveEmail": false
   }
@@ -30,7 +33,7 @@ var insertDocuments = function (db, callback) {
 //change the phone number
 var updateDocument = function (db, callback) {
   var collection = db.collection('users');
-  collection.updateOne(defaultUser, { $set: { "Phone": "9169195463" } }, function (err, result) {
+  collection.updateOne(defaultUser, { $set: { "Phone": "9165551212" } }, function (err, result) {
     assert.equal(err, null);
     assert.equal(1, result.result.n);
     console.log("Updated default user");
