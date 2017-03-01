@@ -1,8 +1,18 @@
-#Nginx on Alpine
-FROM nginx:alpine
+#nodejs on Alpine
+FROM mvertes/alpine-mongo
 
-#Config nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+ENV NODE_ENV_PORT_NUM 80
 
-#Copy website contents
-#COPY public /usr/share/nginx/html
+EXPOSE 80
+
+WORKDIR /usr/src/app
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh nodejs
+
+RUN git clone https://github.com/theifishgroup/chhs-prototype.git
+
+WORKDIR chhs-prototype
+RUN npm install
+
+CMD ["npm", "start"]
