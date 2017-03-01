@@ -84,21 +84,8 @@ Utilized five (5) modern and open-source technologies which include:
 ###m. IaaS and PaaS Environments
 The prototype was deployed a private cloud but has been containerized using Docker (https://www.docker.com/) for seamless deployment into an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider such as the Amazon Cloud.
 
-
-###n. Automated
-Unit Testing
-
-
-The
-prototype was tested using automated unit tests. For all back end processing
-accomplished via the business logic tier, code was remotely executed and the
-return data validated programmatically. For Front End testing, testing was
-performed using Sikuli (http://www.sikuli.org/).
-
-
-
- 
-
+###n. Automated Unit Testing
+The prototype was tested using automated unit tests. For all back end processing accomplished via the business logic tier, code was remotely executed and the return data validated programmatically. For Front End testing, testing was performed using Sikuli (http://www.sikuli.org/).
 
 ###o. Continuous Integration
 Jenkins (https://jenkins.io/) is a leading open source automation server which provides hundreds of plugins to support building, deploying and automating any project. This platform was used to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider.
@@ -126,5 +113,3 @@ Prototype and underlying platforms used to create and run the PQVP DS-AD Applica
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
