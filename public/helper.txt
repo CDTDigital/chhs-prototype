@@ -172,6 +172,8 @@ var arcgisGEMS = {
                 show collections
                 db.getName()
 
+                "development": "lite-server",
+
 for (i = 0; i < map.graphics.graphics.length; i++) {
 
       var _graphic = map.graphics.graphics[i];
@@ -188,3 +190,20 @@ for (i = 0; i < map.graphics.graphics.length; i++) {
 npm run env NODE_ENV=production
 npm run env NODE_ENV_PORT_NUM=8080
 npm run env | more
+
+
+docker build -t ifishgroup/adpq .
+docker login
+
+docker exec -it adpq /bin/bash
+
+docker build --no-cache -t ifishgroup/adpq:v1 .
+
+docker build -t ifishgroup/adpq:v2 .
+docker push ifishgroup/adpq:v2
+
+docker pull ifishgroup/adpq:v2
+
+docker pull --all-tags ifishgroup/adpq
+
+docker run --name adpq -p 8004:80 -d ifishgroup/adpq:v2

@@ -27,7 +27,7 @@
 <script>
     $(function () {
 
-        
+
         //Mimics Admin Login
         app.isAdmin = true;
 
@@ -41,7 +41,7 @@
             .then(function (response) {
 
                 app.alertDataSet = response;
-                
+
                 var trHTML = '';
                 $.each(response, function (i, item) {
                     trHTML += '<tr><td>' + item.Date + '</td><td>' + item.Title + '</td><td>' + item.Type + '</td><td><a href="#" title="' + item.Title + '" class="analytics view">View</a></td></tr>';
@@ -56,6 +56,10 @@
             e.preventDefault();
             arcgis.showAnalyticalPopup($(this));
         });
+
+
+        arcgis.showUserMarker();
+
 
     });
 
