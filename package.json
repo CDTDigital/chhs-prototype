@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node app.js",
     "webapi": "node webapi/webapi.js",
-    "test": "node test.js"
+    "test": "node test.js",
+    "prestart": "mongod &"
   },
   "author": "The iFish Group Inc",
   "repository": {

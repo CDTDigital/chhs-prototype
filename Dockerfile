@@ -10,7 +10,9 @@ WORKDIR /usr/src/app
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git openssh nodejs
 
-RUN git clone https://github.com/theifishgroup/chhs-prototype.git
+#RUN git clone https://github.com/theifishgroup/chhs-prototype.git
+RUN mkdir chhs-prototype
+COPY . chhs-prototype
 
 WORKDIR chhs-prototype
 RUN npm install
