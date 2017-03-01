@@ -63,62 +63,19 @@ For development, a combination of the U.S. Web Design Standards (https://standar
 People who participated in the application development process as community stakeholders performed usability testing upon successful completion of the application in the test environment. Users were asked to perform User Stories and provide
 qualitative feedback regarding the application including usability, intuitiveness, usefulness and overall experience. Feedback was integrated and informed the subsequent work or versions of the prototype.
 
+###j. Iterative Approach 
+An iterative approach was utilized where feedback informed subsequent work or versions of the Prototype. 
 
- 
+###k. Responsive Multi-Device Design
+The prototype was created to work on multiple devices, and presents a responsive design. It was tested on Google Chrome, Windows Edge, and Chrome for Android on mobile devices.
 
-
-###j. Iterative
-Approach
-
-
-An iterative
-approach was utilized where feedback informed subsequent work or versions of
-the
-
-
-Prototype. 
-
-
- 
-
-
-###k. Responsive
-Multi-Device Design
-
-
-The
-prototype was created to work on multiple devices, and presents a responsive
-design. It was tested on Google Chrome, Windows Edge, and Chrome for Android on
-mobile devices.
-
-
- 
-
-
-###l. Open-Source
-Technologies
-
-
-Utilized five
-(5) modern and open-source technologies which include:
-
-
+###l. Open-Source Technologies
+Utilized five (5) modern and open-source technologies which include:
 * MongoDB (https://www.mongodb.com/community)
-
-
-* Bootstrap
-(http://getbootstrap.com/)
-
-
+* Bootstrap (http://getbootstrap.com/)
 * Sikuli (http://www.sikuli.org/)
-
-
-* The Web
-Accessibility Evaluation Tool (http://wave.webaim.org/)
-
-
+* The Web Accessibility Evaluation Tool (http://wave.webaim.org/)
 * Jenkins (https://jenkins.io/)
-
 
 * Docker (https://www.docker.com/) 
 
