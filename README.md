@@ -76,32 +76,13 @@ Utilized five (5) modern and open-source technologies which include:
 * Sikuli (http://www.sikuli.org/)
 * The Web Accessibility Evaluation Tool (http://wave.webaim.org/)
 * Jenkins (https://jenkins.io/)
-
 * Docker (https://www.docker.com/) 
-
-
 * HTML5
-
-
 * CSS3
+* JavaScript (JS)
 
-
-* JavaScript
-(JS)
-
-
- 
-
-
-###m. IaaS
-and PaaS Environments
-
-
-The
-prototype was deployed a private cloud but has been containerized using Docker
-(https://www.docker.com/) for seamless
-deployment into an Infrastructure as a Service (IaaS) or Platform as Service (PaaS)
-provider such as the Amazon Cloud.
+###m. IaaS and PaaS Environments
+The prototype was deployed a private cloud but has been containerized using Docker (https://www.docker.com/) for seamless deployment into an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider such as the Amazon Cloud.
 
 
 ###n. Automated
@@ -120,121 +101,30 @@ performed using Sikuli (http://www.sikuli.org/).
 
 
 ###o. Continuous Integration
-
-
-Jenkins (https://jenkins.io/) is a leading open source
-automation server which provides hundreds of plugins to support building,
-deploying and automating any project. This platform was used to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider.
-
-
- 
-
+Jenkins (https://jenkins.io/) is a leading open source automation server which provides hundreds of plugins to support building, deploying and automating any project. This platform was used to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider.
 
 ###p. Configuration Management
-
-
-Setup
-or used configuration management;
-
-
- 
-
+Setup or used configuration management;
 
 ###q. Continuous Monitoring
+Setup or used continuous monitoring;
 
+###r. Open Source Container
+Docker (https://www.docker.com) is an open platform for developers and sysadmins to build, ship, and run distributed applications, whether on laptops, data center VMs, or the cloud. The prototype is containerized using this operating-system-level virtualization software.
 
-Setup or used
-continuous monitoring;
-
-
- 
-
-
-###r. Open
-Source Container
-
-
-Docker (https://www.docker.com) is an open platform
-for developers and sysadmins to build, ship, and run distributed applications,
-whether on laptops, data center VMs, or the cloud. The prototype is
-containerized using this operating-system-level virtualization software.
-
-
- 
-
-
-###s.
-Installing Instructions
-
-
-Please see
-the project’s Installation.md file for the detailed documentation of the steps
-necessary to install and run the prototype on another machine.
-
-
- 
-
+###s. Installing Instructions
+Please see the project’s Installation.md file for the detailed documentation of the steps necessary to install and run the prototype on another machine.
 
 ##t. Open License
+The Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge.
 
+Product: PQVP DS-AD Application
+Copyright © 2017, iFish Group, LLC.
 
-The Prototype
-and underlying platforms used to create and run the prototype are openly
-licensed and free of charge.
+Prototype and underlying platforms used to create and run the PQVP DS-AD Application are openly licensed and free of charge. 
 
-
-Product:
-PQVP DS-AD Application
-
-
-Copyright ©
-2017, iFish Group, LLC.
-
-
- 
-
-
-Prototype and
-underlying platforms used to create and run the PQVP DS-AD Application are
-openly
-
-
-licensed and
-free of charge. 
-
-
- 
-
-
-This program
-is free software: you can redistribute it and/or modify it under the terms of
-the GNU General Public License as published by the Free Software Foundation,
-either version 3 of the License, or
-
-
-(at your
-option) any later version.
-
-
- 
-
-
-This program
-is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.  See the
-
-
-GNU General
-Public License for more details.
-
-
- 
-
-
-You should
-have received a copy of the GNU General Public License along with this
-program.  If not, see
-<http://www.gnu.org/licenses/>.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
