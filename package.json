@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The iFish Group's ADPQ",
   "scripts": {
-    "start": "node app.js",
+    "start": "node inituser && node initsamplealerts.js && node app.js",
     "webapi": "node webapi/webapi.js",
     "test": "node test.js",
     "prestart": "mongod &"
