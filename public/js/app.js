@@ -3,9 +3,9 @@ var app = {
 
     isAdmin: false,
 
-    userprofileApi: "http://adpq.ifgcloud.com/userprofile",
-    notificationApi: "http://adpq.ifgcloud.com/notifications",
-    sendalertApi: "http://adpq.ifgcloud.com/sendalert",
+    userprofileApi: "/userprofile",
+    notificationApi: "/notifications",
+    sendalertApi: "/sendalert",
 
     alertDataSet: null,
 
