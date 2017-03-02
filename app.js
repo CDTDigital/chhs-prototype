@@ -10,6 +10,25 @@ var app = express()
 //http
 var portnum = process.env.NODE_ENV_PORT_NUM
 
+//twilio config from environment
+var twilioConfig = {
+  accountSid : process.env.TWILIO_ACCOUNT_SID,
+  authToken : process.env.TWILIO_AUTH_TOKEN,
+  fromTwilioNumber : process.env.TWILIO_SENDING_NUMBER
+}
+
+var requiredConfig = [twilioConfig.accountSid, twilioConfig.authToken, twilioConfig.fromTwilioNumber];
+var isConfigured = requiredConfig.every(function(configValue) {
+  return configValue || false;
+});
+
+twilioConfig.isConfigured = isConfigured
+
+if (!twilioConfig.isConfigured) {
+  console.log('Invalid Twilio configuration.')
+  console.log('TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_NUMBER must be set in order to send SMS');
+}
+
 app.use(function (req, res, next) {
    res.header("Access-Control-Allow-Origin", req.headers.origin)
    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT")
