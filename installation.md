@@ -22,3 +22,5 @@ If you would like to enable Twilio as the SMS provider, issue the following envi
 ```
 docker run --name adpq -e TWILIO_ACCOUNT_SID={twilio sid} -e TWILIO_AUTH_TOKEN={twilio token} -e TWILIO_SENDING_NUMBER={10digit twilio} -p 8080:80 -d ifishgroup/adpq:latest
 ```
+##Sending Email
+In order to maximize portability, the Prototype sends email via unauthorized SMTP without the use of an intermediary SMTP server. As a result, many countermeasures intended to block spam can interfere with message delivery. In a real deployment, the Prototype would be configured to send authorized email via an SMTP server would be used.
