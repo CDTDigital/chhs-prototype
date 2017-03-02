@@ -207,3 +207,11 @@ docker pull ifishgroup/adpq:v2
 docker pull --all-tags ifishgroup/adpq
 
 docker run --name adpq -p 8004:80 -d ifishgroup/adpq:v2
+
+
+Please SSH to (can be reach from IFG office or VPN)
+IP address is: 10.0.2.220
+User: admin104
+Password: 44gjH13Bc@4!
+
+Public IP: 96.46.155.198

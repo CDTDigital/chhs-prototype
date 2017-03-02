@@ -137,8 +137,8 @@ var helper = {
                 if (!arcgisWeatherHazard.isloaded) {
                     $.when(arcgisWeatherHazard.getTemperatureCount(), arcgisWeatherHazard.getPrecipitationCount()).done(function (temp, precip) {
 
-                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.temperaturelayerid, arcgisWeatherHazard.whereclause, '3-7 Day Temperature Outlook', arcgisWeatherHazard.temperaturelayerdesc, temp);
-                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.precipitationlayerid, arcgisWeatherHazard.whereclause, '3-7 Day Precipitation Outlook', arcgisWeatherHazard.precipitationlayerdesc, precip);
+                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.temperaturelayerid, arcgisWeatherHazard.whereclause, '3-7 Day Temperature Outlook (All 50 States)', arcgisWeatherHazard.temperaturelayerdesc, temp);
+                        addCatalogLink(catalog, arcgisWeatherHazard.api, arcgisWeatherHazard.precipitationlayerid, arcgisWeatherHazard.whereclause, '3-7 Day Precipitation Outlook (All 50 States)', arcgisWeatherHazard.precipitationlayerdesc, precip);
 
                         arcgisWeatherHazard.isloaded = true;
 
