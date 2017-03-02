@@ -2,6 +2,16 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var ifishDAL = require('./ifish_modules/ifishDAL')
 var ifishAlert = require('./ifish_modules/ifishAlert')
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/app.js.log', {flags : 'w'});
+var log_stdout = process.stdout;
+
+//redirect to stdout and to file
+console.log = function(d) { //
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+};
 
 var dal = new ifishDAL()
 var alert = new ifishAlert()
