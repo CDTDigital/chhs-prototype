@@ -70,7 +70,7 @@ IFG designed the application to meet and exceed accessibility guidelines to ensu
 ##h. Design Style Guide and Pattern Library
 For development, we employed a combination of the [U.S. Web Design Standards](https://standards.usa.gov/) and [Bootstrap](http://getbootstrap.com/) themes and templates to construct the application. Bootstrap is an HTML5, CSS3 and JS framework for developing responsive projects compatible with both desktop and mobile environments.
  
-##i. Performed usability tests with people
+##i. Performed Usability Tests With People
 People who participated in the application development process as community stakeholders performed usability testing upon successful completion of the application in the test environment. Users were asked to perform User Stories and provide qualitative feedback regarding the application including usability, intuitiveness, usefulness and overall experience. We integrated feedback and informed the subsequent work or versions of the prototype.
  
 ##j. Iterative Approach
