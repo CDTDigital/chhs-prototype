@@ -1,21 +1,18 @@
 #Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD) Prototype
 
-#Prototype
-
 ##Prototype URL
 http://adpq.ifgcloud.com
 
 ##Product Information
-Developed by: The iFish Group, Inc. (IFG)
-Developed for: California Department of Technology Statewide Technology Procurement
-Project Name: Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD)
-Contract ID: RFI # CDT_ADPQ_0117
+* Developed by: The iFish Group, Inc. (IFG)
+* Developed for: California Department of Technology Statewide Technology Procurement
+* Project Name: Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD)
+* Contract ID: RFI # CDT_ADPQ_0117
 
 ##Testing Notes
 A walk-through of the prototype has been recorded and posted <here> which demonstrates the use of the system.
 
 Please note: Since a developer license for the Twilio messaging service is utilized by our prototype to send SMS alerts to users, phone numbers must be specifically authorized within our Twilio administration console in order for messages to be sent. For security purposes, the prototype only sends emails to users with valid and authorized phone numbers. If you would like to have your phone number added to allow for the testing of SMS messaging functionality on our prototype demonstration instance, please contact us at https://www.ifishgroup.com/contact-us/. Otherwise, instructions for independent installations can be found in the installation.md. 
-
 
 ##Synopsis
 The PQVP DS-AD Application allows California residents to establish and manage their profile and receive emergency and non-emergency notifications via email, Short Message Service (SMS), and/or push notification based on the location and contact information provided in their profile and/or the geo-location of their cell phone (if they have opted in for this service). In addition, the application provides the authorized administrative users with the ability to publish notifications and track, and analyze and visualize related data.
@@ -23,7 +20,6 @@ The PQVP DS-AD Application allows California residents to establish and manage t
 This readme.md file contains a description of the project. It includes a link to the installation instructions contained in the installation.md file. Documents pertaining to the development process, such as meeting notes and other artifacts, have been published in the IFG Digital Services Playbook directory within the project’s GitHub repository.
 ##Code Flow
 In a typical use case, a user connects to the web page User Interface (UI) via HTML pages located in the Public folder. These utilize JavaScript (JS) libraries such as the Bootstrap framework. The JS libraries call REST services which are defined in the Application which make use of modules which issue database calls to the MongoDB instance which has been installed and configured within the Docker container.
-
 
 #Technical Approach
 The following technical approach was used to create the Working Prototype. [IFG Technical Approach]
