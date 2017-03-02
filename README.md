@@ -50,8 +50,11 @@ In order to ensure that the PQVP DS-AD Application meets peoples’ needs, commu
 ##d. User-Centric Design Techniques and Tools
 IFG utilizes a tailored agile development methodology which is centered around User-Centered Design (UCD). 
 In the initial design process, we identified personas (representing generic types of potential users) and scenarios (representing potential use cases of the application). For each persona and scenario, we generated a user story that complies with our agile development process.
+
 Each user story includes a testable description of the distinct, granular, verifiable activities of people along with the acceptance criteria.
+
 A workflow consists of multiple related user stories that operate together to achieve a specific purpose or business process. Workflows are described using User Role Maps and Process Maps which are frequently visualized using Universal Markup Language (UML) notation and swim lane diagrams. 
+
 User stories that are subject to authorization restriction clustered into User Roles and implemented using a Role Based Access Control (RBAC) approach. 
 
 ##e. GitHub Repository
