@@ -117,11 +117,10 @@ Please see the project’s Installation.md file for the detailed documentation o
 
 ##t. Open License
 The prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge.
-Product: PQVP DS-AD Application
-Copyright © 2017, iFish Group, Inc.
 
-Prototype and underlying platforms used to create and run the PQVP DS-AD Application are openly
-licensed and free of charge. 
+Product: PQVP DS-AD Application
+
+Copyright © 2017, iFish Group, Inc.
 
 This program is free software: You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
