@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "webapi": "node webapi/webapi.js",
-    "test": "node test.js",    
+    "test": "node test.js",
     "prestart": "mongod & sleep 3 && node inituser && node initsamplealerts.js"
   },
   "author": "The iFish Group Inc",
@@ -24,9 +24,11 @@
     "cors": "^2.8.1",
     "dateformat": "^2.0.0",
     "express": "^4.14.1",
+    "fs": "0.0.1-security",
     "lite-server": "^2.2.2",
     "mongodb": "^2.2.24",
     "sendmail": "^1.1.1",
-    "twilio": "^3.0.0-rc.13"
+    "twilio": "^3.0.0-rc.13",
+    "util": "^0.10.3"
   }
 }
