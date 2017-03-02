@@ -1,13 +1,15 @@
 #Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD) Prototype
 
+#Prototype
+
 ##Prototype URL
 http://adpq.ifgcloud.com
 
 ##Product Information
-* Developed by: The iFish Group, Inc. (IFG)
-* Developed for: California Department of Technology Statewide Technology Procurement
-* Project Name: Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD)
-* Contract ID: RFI # CDT_ADPQ_0117
+Developed by: The iFish Group, Inc. (IFG)
+Developed for: California Department of Technology Statewide Technology Procurement
+Project Name: Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD)
+Contract ID: RFI # CDT_ADPQ_0117
 
 ##Testing Notes
 A walk-through of the prototype has been recorded and posted <here> which demonstrates the use of the system.
@@ -38,13 +40,14 @@ The iFish Group (IFG) assigned one leader, Clark Cunningham, who had the authori
 
 ##b. Multidisciplinary Team
 A core group of IFG staff members worked collaboratively to develop the PQVP DS-AD Application. Team members included:
-* Clark Cunningham: Product Manager, Technical Architect, Agile Coach
-* Ernie Lopez:  Business Analyst, Visual Designer, Frontend Web Developer
-* Fernando Cabrera:  Technical Architect, Backend Web Developer
-* Thomas Weitzel: Interaction Designer/User Researcher/Usability Tester, Writer/Content Designer/Content Strategist
-* Paul Venable:  DevOps Engineer
-* Frank Ono:  Security Engineer
-* Scott Schriber:  Delivery Manager, Agile Coach
+
+Clark Cunningham: Product Manager, Technical Architect, Agile Coach
+Ernie Lopez:  Business Analyst, Visual Designer, Frontend Web Developer
+Fernando Cabrera:  Technical Architect, Backend Web Developer
+Thomas Weitzel: Interaction Designer/User Researcher/Usability Tester, Writer/Content Designer/Content Strategist
+Paul Venable:  DevOps Engineer
+Frank Ono:  Security Engineer
+Scott Schriber:  Delivery Manager, Agile Coach
 
 For more information about our team and their qualifications: [IFG Team]
 
