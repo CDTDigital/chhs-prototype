@@ -1,7 +1,7 @@
 #Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD) Prototype Installation
 
 ##Docker
-Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications, whether on laptops, data center VMs, or the cloud. Learn more at https://www.docker.com. 
+[Docker](https://www.docker.com) is an open platform for developers and sysadmins to build, ship, and run distributed applications, whether on laptops, data center VMs, or the cloud. 
 
 ##Docker Run Command on Port 80
 To run The iFish Group's prototype from Docker on the default port 80: 
@@ -23,4 +23,4 @@ If you would like to enable Twilio as the SMS provider, issue the following envi
 docker run --name adpq -e TWILIO_ACCOUNT_SID={twilio sid} -e TWILIO_AUTH_TOKEN={twilio token} -e TWILIO_SENDING_NUMBER={10digit twilio} -p 8080:80 -d ifishgroup/adpq:latest
 ```
 ##Sending Email
-In order to maximize portability, the Prototype sends email via unauthorized SMTP without the use of an intermediary SMTP server. As a result, many countermeasures intended to block spam can interfere with message delivery. In a real deployment, the Prototype would be configured to send authorized email via an SMTP server would be used.
+In order to maximize portability, the Prototype sends email via unauthorized SMTP without the use of an intermediary SMTP server. As a result, many countermeasures intended to block spam can interfere with message delivery. In a production deployment, the Prototype would be configured to send authorized email via an SMTP server.
