@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "The iFish Group's ADPQ",
   "scripts": {
-    "start": "node inituser && node initsamplealerts.js && node app.js",
+    "start": "node app.js",
     "webapi": "node webapi/webapi.js",
-    "test": "node test.js",
-    "prestart": "mongod &"
+    "test": "node test.js",    
+    "prestart": "mongod & sleep 3 && node inituser && node initsamplealerts.js"
   },
   "author": "The iFish Group Inc",
   "repository": {
