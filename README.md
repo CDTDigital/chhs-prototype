@@ -1,14 +1,15 @@
 #Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD) Prototype
 
-#Prototype
-
 ##Prototype URL
 http://adpq.ifgcloud.com
 
 ##Product Information
 Developed by: The iFish Group, Inc. (IFG)
+
 Developed for: California Department of Technology Statewide Technology Procurement
+
 Project Name: Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD)
+
 Contract ID: RFI # CDT_ADPQ_0117
 
 ##Testing Notes
