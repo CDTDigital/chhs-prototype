@@ -24,7 +24,7 @@ This [readme.md](https://github.com/theifishgroup/chhs-prototype/blob/master/REA
 In a typical use case, a user connects to the web page User Interface (UI) via HTML pages located in the [Public](https://github.com/theifishgroup/chhs-prototype/tree/master/public) folder. These utilize [JavaScript](https://github.com/theifishgroup/chhs-prototype/tree/master/public/js) (JS) libraries such as the [Bootstrap](https://github.com/theifishgroup/chhs-prototype/blob/master/public/js/bootstrap/bootstrap.min.js) framework. The JS libraries call REST services which are defined in the [application](https://github.com/theifishgroup/chhs-prototype/blob/master/app.js) which make use of [modules](https://github.com/theifishgroup/chhs-prototype/tree/master/ifish_modules) which issue database calls to the MongoDB instance which has been installed and configured within the Docker container.
 
 #Technical Approach
-The following technical approach was used to create the Working Prototype. [IFG Technical Approach](https://github.com/theifishgroup/chhs-prototype/blob/master/Agile/RFI%20CDT-ADPQ-0117-IFG%20Technical%20Approach-FINAL.docx) This approach followed the US Digital Services Playbook which is available online at: https://playbook.cio.gov
+The [IFG Technical Approach](https://github.com/theifishgroup/chhs-prototype/blob/master/Agile/RFI%20CDT-ADPQ-0117-IFG%20Technical%20Approach-FINAL.docx) was used to create the Working Prototype. This approach followed the US Digital Services Playbook which is available online at: https://playbook.cio.gov
 
 ##a. Assigned Product Leader
 The iFish Group (IFG) assigned one leader, Clark Cunningham, who had the authority and responsibility for the quality of the prototype submitted.  
