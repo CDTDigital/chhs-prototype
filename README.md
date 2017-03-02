@@ -81,7 +81,7 @@ IFG created the prototype to work on multiple devices. It presents a responsive 
 IFG utilized more than five (5) modern and open-source technologies. They include:
 * [MongoDB](https://www.mongodb.com/community) – Database Component
 * [Bootstrap](http://getbootstrap.com/) – Front-end Framework Component
-* [Sikuli](http://www.sikuli.org/) UI Testing Component
+* [Sikuli](http://www.sikuli.org/) – UI Testing Component
 * [The Web Accessibility Evaluation Tool](http://wave.webaim.org/) – Accessibility Testing Component
 * [GoCD](https://www.gocd.io) – Continuous Integration Component
 * [Bitbucket](https://bitbucket.org) – Configuration Management Component
