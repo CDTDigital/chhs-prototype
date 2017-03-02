@@ -45,7 +45,7 @@ For more information about our team and their qualifications: [IFG Team](https:/
 ##c. Understanding What People Need
 In order to ensure that the PQVP DS-AD Application meets peoples’ needs, community stakeholders who represent potential actual users of the prototype and the given the dataset were involved in the prototype development and design process. As an example, one of the people we involved included:
 
-Marcie L. - Sacramento Area resident who lives near a river.  Earlier in 2017, her residence was subject to flood warning evacuations. Prior to this year, none of her family members had subscribed to an emergency notification service. As a result of flooding dangers, she signed up to a service for alerts in early 2017.
+* Marcie L. - Sacramento Area resident who lives near a river.  Earlier in 2017, her residence was subject to flood warning evacuations. Prior to this year, none of her family members had subscribed to an emergency notification service. As a result of flooding dangers, she signed up to a service for alerts in early 2017.
 
 ##d. User-Centric Design Techniques and Tools
 IFG utilizes a tailored agile development methodology which is centered around User-Centered Design (UCD). 
@@ -69,7 +69,6 @@ For development, we employed a combination of the [U.S. Web Design Standards](ht
  
 ##i. Performed usability tests with people
 People who participated in the application development process as community stakeholders performed usability testing upon successful completion of the application in the test environment. Users were asked to perform User Stories and provide qualitative feedback regarding the application including usability, intuitiveness, usefulness and overall experience. We integrated feedback and informed the subsequent work or versions of the prototype.
-
  
 ##j. Iterative Approach
 IFG used an iterative approach where feedback informed subsequent work or versions of the
