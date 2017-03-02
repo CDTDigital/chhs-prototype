@@ -82,17 +82,17 @@ IFG created the prototype to work on multiple devices. It presents a responsive 
 
 ##l. Open-Source Technologies
 IFG utilized more than five (5) modern and open-source technologies. They include:
-* [MongoDB](https://www.mongodb.com/community) – Database Component
-* [Bootstrap](http://getbootstrap.com/) – Front-end Framework Component
-* [Sikuli](http://www.sikuli.org/) – UI Testing Component
-* [The Web Accessibility Evaluation Tool](http://wave.webaim.org/) – Accessibility Testing Component
-* [GoCD](https://www.gocd.io) – Continuous Integration Component
-* [Bitbucket](https://bitbucket.org) – Configuration Management Component
-* [Git](https://github.com) – Source Control Component
-* [Docker](https://www.docker.com/) – Containerization Component
-* HTML5 – Front-end Framework Component
-* CSS3 – Front-end Framework Component
-* JavaScript (JS) – Front-end Framework Component
+* **[MongoDB](https://www.mongodb.com/community) –** Database Component
+* **[Bootstrap](http://getbootstrap.com/) –** Front-end Framework Component
+* **[Sikuli](http://www.sikuli.org/) –** UI Testing Component
+* **[The Web Accessibility Evaluation Tool](http://wave.webaim.org/) –** Accessibility Testing Component
+* **[GoCD](https://www.gocd.io) –** Continuous Integration Component
+* **[Bitbucket](https://bitbucket.org) –** Configuration Management Component
+* **[Git](https://github.com) –** Source Control Component
+* **[Docker](https://www.docker.com/) –** Containerization Component
+* **HTML5 –** Front-end Framework Component
+* **CSS3 –** Front-end Framework Component
+* **JavaScript (JS) –** Front-end Framework Component
 
 ##m. IaaS and PaaS Environments
 IFG deployed the prototype to a private cloud, but it has been containerized using [Docker](https://www.docker.com/) for seamless deployment into an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider such as the Amazon Cloud. The iFish Group is a IaaS and PaaS provider for many of our clients so we have hosted this prototype on our environment.
