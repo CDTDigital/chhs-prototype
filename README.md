@@ -5,10 +5,10 @@ http://adpq.ifgcloud.com
 
 ##Product Information
 
-* _Developed by:_ The iFish Group, Inc. (IFG)
-* _Developed for:_ California Department of Technology Statewide Technology Procurement
-* _Project Name:_ Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD)
-* _Contract ID:_ RFI # CDT_ADPQ_0117
+* *Developed by:* The iFish Group, Inc. (IFG)
+* *Developed for:* California Department of Technology Statewide Technology Procurement
+* *Project Name:* Pre-Qualified Vendor Pool for Digital Services – Agile Development (PQVP DS-AD)
+* *Contract ID:* RFI # CDT_ADPQ_0117
 
 ##Testing Notes
 A walk-through of the prototype has been recorded and posted [here](https://youtu.be/AVOHbvyp7pY) which demonstrates the use of the system.
@@ -32,20 +32,20 @@ The iFish Group (IFG) assigned one leader, Clark Cunningham, who had the authori
 ##b. Multidisciplinary Team
 A core group of IFG staff members worked collaboratively to develop the PQVP DS-AD Application. Team members included:
 
-* _Clark Cunningham:_ Product Manager, Technical Architect, Agile Coach
-* _Ernie Lopez:_  Business Analyst, Visual Designer, Frontend Web Developer
-* _Fernando Cabrera:_  Technical Architect, Backend Web Developer
-* _Thomas Weitzel:_ Interaction Designer/User Researcher/Usability Tester, Writer/Content Designer/Content Strategist
-* _Paul Venable:_  DevOps Engineer
-* _Frank Ono:_  Security Engineer
-* Scott Schriber:  Delivery Manager, Agile Coach
+* *Clark Cunningham:* Product Manager, Technical Architect, Agile Coach
+* *Ernie Lopez:*  Business Analyst, Visual Designer, Frontend Web Developer
+* *Fernando Cabrera:*  Technical Architect, Backend Web Developer
+* *Thomas Weitzel:* Interaction Designer/User Researcher/Usability Tester, Writer/Content Designer/Content Strategist
+* *Paul Venable:*  DevOps Engineer
+* *Frank Ono:*  Security Engineer
+* *Scott Schriber:*  Delivery Manager, Agile Coach
 
 For more information about our team and their qualifications: [IFG Team](https://github.com/theifishgroup/chhs-prototype/blob/master/Agile/ADPQ%20IFG%20TEAM-FINAL.docx)
 
 ##c. Understanding What People Need
 In order to ensure that the PQVP DS-AD Application meets peoples’ needs, community stakeholders who represent potential actual users of the prototype and the given the dataset were involved in the prototype development and design process. As an example, one of the people we involved included:
 
-* _Marcie L.:_ Sacramento Area resident who lives near a river.  Earlier in 2017, her residence was subject to flood warning evacuations. Prior to this year, none of her family members had subscribed to an emergency notification service. As a result of flooding dangers, she signed up to a service for alerts in early 2017.
+* *Marcie L.:* Sacramento Area resident who lives near a river.  Earlier in 2017, her residence was subject to flood warning evacuations. Prior to this year, none of her family members had subscribed to an emergency notification service. As a result of flooding dangers, she signed up to a service for alerts in early 2017.
 
 ##d. User-Centric Design Techniques and Tools
 IFG utilizes a tailored agile development methodology which is centered around User-Centered Design (UCD). 
