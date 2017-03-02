@@ -12,9 +12,14 @@ RUN apk update && apk upgrade && \
 
 #RUN git clone https://github.com/theifishgroup/chhs-prototype.git
 RUN mkdir chhs-prototype
-COPY . chhs-prototype
-
 WORKDIR chhs-prototype
+RUN mkdir ifish_modules
+COPY ifish_modules ifish_modules
+RUN mkdir public
+COPY public public
+COPY *.js ./
+COPY package.json ./
+
 RUN npm install
 
 CMD ["npm", "start"]
