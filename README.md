@@ -10,7 +10,7 @@ http://adpq.ifgcloud.com
 * Contract ID: RFI # CDT_ADPQ_0117
 
 ##Testing Notes
-A walk-through of the prototype has been recorded and posted <here> which demonstrates the use of the system.
+A walk-through of the prototype has been recorded and posted [here](http:\\www.google.com) which demonstrates the use of the system.
 
 Please note: Since a developer license for the Twilio messaging service is utilized by our prototype to send SMS alerts to users, phone numbers must be specifically authorized within our Twilio administration console in order for messages to be sent. For security purposes, the prototype only sends emails to users with valid and authorized phone numbers. If you would like to have your phone number added to allow for the testing of SMS messaging functionality on our prototype demonstration instance, please contact us at https://www.ifishgroup.com/contact-us/. Otherwise, instructions for independent installations can be found in the installation.md. 
 
@@ -18,18 +18,12 @@ Please note: Since a developer license for the Twilio messaging service is utili
 The PQVP DS-AD Application allows California residents to establish and manage their profile and receive emergency and non-emergency notifications via email, Short Message Service (SMS), and/or push notification based on the location and contact information provided in their profile and/or the geo-location of their cell phone (if they have opted in for this service). In addition, the application provides the authorized administrative users with the ability to publish notifications and track, and analyze and visualize related data.
 
 This readme.md file contains a description of the project. It includes a link to the installation instructions contained in the installation.md file. Documents pertaining to the development process, such as meeting notes and other artifacts, have been published in the IFG Digital Services Playbook directory within the project’s GitHub repository.
+
 ##Code Flow
 In a typical use case, a user connects to the web page User Interface (UI) via HTML pages located in the Public folder. These utilize JavaScript (JS) libraries such as the Bootstrap framework. The JS libraries call REST services which are defined in the Application which make use of modules which issue database calls to the MongoDB instance which has been installed and configured within the Docker container.
 
 #Technical Approach
-The following technical approach was used to create the Working Prototype. [IFG Technical Approach]
-
-This approach followed the US Digital Services Playbook which is available online at:
-https://playbook.cio.gov
-
-
-#Technical Approach-README.md File
-[README.md]
+The following technical approach was used to create the Working Prototype. [IFG Technical Approach](https://github.com/theifishgroup/chhs-prototype/blob/master/Agile/RFI%20CDT-ADPQ-0117-IFG%20Technical%20Approach-FINAL.docx) This approach followed the US Digital Services Playbook which is available online at: https://playbook.cio.gov
 
 ##a. Assigned Product Leader
 The iFish Group (IFG) assigned one leader, Clark Cunningham, who had the authority and responsibility for the quality of the prototype submitted.  
@@ -37,15 +31,15 @@ The iFish Group (IFG) assigned one leader, Clark Cunningham, who had the authori
 ##b. Multidisciplinary Team
 A core group of IFG staff members worked collaboratively to develop the PQVP DS-AD Application. Team members included:
 
-Clark Cunningham: Product Manager, Technical Architect, Agile Coach
-Ernie Lopez:  Business Analyst, Visual Designer, Frontend Web Developer
-Fernando Cabrera:  Technical Architect, Backend Web Developer
-Thomas Weitzel: Interaction Designer/User Researcher/Usability Tester, Writer/Content Designer/Content Strategist
-Paul Venable:  DevOps Engineer
-Frank Ono:  Security Engineer
-Scott Schriber:  Delivery Manager, Agile Coach
+* Clark Cunningham: Product Manager, Technical Architect, Agile Coach
+* Ernie Lopez:  Business Analyst, Visual Designer, Frontend Web Developer
+* Fernando Cabrera:  Technical Architect, Backend Web Developer
+* Thomas Weitzel: Interaction Designer/User Researcher/Usability Tester, Writer/Content Designer/Content Strategist
+* Paul Venable:  DevOps Engineer
+* Frank Ono:  Security Engineer
+* Scott Schriber:  Delivery Manager, Agile Coach
 
-For more information about our team and their qualifications: [IFG Team]
+For more information about our team and their qualifications: [IFG Team](https://github.com/theifishgroup/chhs-prototype/blob/master/Agile/ADPQ%20IFG%20TEAM-FINAL.docx)
 
 ##c. Understanding What People Need
 In order to ensure that the PQVP DS-AD Application meets peoples’ needs, community stakeholders who represent potential actual users of the prototype and the given the dataset were involved in the prototype development and design process. As an example, one of the people we involved included:
