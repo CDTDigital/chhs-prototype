@@ -15,7 +15,7 @@ In addition, if you'd like to run Docker in another port, for example port 8080:
 docker run --name adpq -p 8080:80 -d ifishgroup/adpq:latest
 ```
 ##Twilio
-Twilio provides a simple HTTP-based API for sending and receiving phone calls and text messages. In order to send messages, an account must be created and the configuration information passed via Docker command. Learn more at http://www.twilio.com 
+[Twilio](http://www.twilio.com) provides a simple HTTP-based API for sending and receiving phone calls and text messages. In order to send messages, an account must be created and the configuration information passed via Docker command.
 
 ##Docker Run Command for Port 8080 with Twilio Integration
 If you would like to enable Twilio as the SMS provider, issue the following environment parameters:
