@@ -11,7 +11,7 @@ http://adpq.ifgcloud.com
 * Contract ID: RFI # CDT_ADPQ_0117
 
 ##Testing Notes
-A walk-through of the prototype has been recorded and posted [here](http:\\www.google.com) which demonstrates the use of the system.
+A walk-through of the prototype has been recorded and posted [here](https://youtu.be/AVOHbvyp7pY) which demonstrates the use of the system.
 
 **Please note:** Since a developer license for the Twilio messaging service is utilized by our prototype to send SMS alerts to users, phone numbers must be specifically authorized within our Twilio administration console in order for messages to be sent. For security purposes, the prototype only sends emails to users with valid and authorized phone numbers. If you would like to have your phone number added to allow for the testing of SMS messaging functionality on our prototype demonstration instance, please contact us at https://www.ifishgroup.com/contact-us/. Otherwise, instructions for independent installations can be found in the installation.md. 
 
