@@ -98,7 +98,7 @@ IFG utilized more than five (5) modern and open-source technologies. They includ
 IFG deployed the prototype to a private cloud, but it has been containerized using [Docker](https://www.docker.com/) for seamless deployment into an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider such as the Amazon Cloud. The iFish Group is a IaaS and PaaS provider for many of our clients so we have hosted this prototype on our environment.
 
 ##n. Automated Unit Testing
-IFG tested the prototype was tested using automated unit tests. For all back end processing accomplished via the business logic tier, code was remotely executed and the return data validated programmatically. Front end testing was performed using [Sikuli](http://www.sikuli.org/). 
+IFG tested the prototype using automated unit tests. For all back end processing accomplished via the business logic tier, code was remotely executed and the return data validated programmatically. Front end testing was performed using [Sikuli](http://www.sikuli.org/). 
 
 ##o. Continuous Integration
 [GoCD](https://www.gocd.io) is a leading open Continuous Integration/Delivery server that provides hundreds of plugins to support building, deploying and automating any project. IFG used this platform to automate the running of tests. We continuously deployed the code to IFG’s IaaS/PaaS environment.  This is one of our standard corporate suites of tools in use on many other projects
